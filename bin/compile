@@ -160,6 +160,8 @@ fi
 
 mkdir -p ${BUILD_DIR}/vendor/php
 tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
+export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
 # newrelic
 echo "-----> Installing newrelic"
