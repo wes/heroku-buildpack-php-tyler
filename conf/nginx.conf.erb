@@ -230,9 +230,7 @@ http {
       }
     }
     
-    location ~ /min {
-      rewrite ^/(.*)$ /min/?$1 break;
-    }
+    rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
   }
 }
