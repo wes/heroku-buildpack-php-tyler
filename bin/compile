@@ -220,13 +220,6 @@ cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
-echo "-----> Instlaling PEAR Libraries for HMT Mofo"
-
-cd ${BUILD_DIR}/vendor/php/lib/php/PEAR
-download_url ${PEAR_LIB}
-tar -xvf pearfiles.tar.gz
-rm pearfiles.tar.gz
-
 echo "-----> Installing boot script"
 cd $BUILD_DIR
 cat >>boot.sh <<EOF
