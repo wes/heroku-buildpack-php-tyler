@@ -229,6 +229,10 @@ http {
         rewrite ^/(.*)$ /feeds2/events/ics_single/$1 last;break;
       }
     }
+    
+    location ~ /min {
+      rewrite ^/([bfg]=.*) /min/index.php?$1 break;
+    }
 
   }
 }
