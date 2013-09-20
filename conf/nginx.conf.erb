@@ -109,17 +109,126 @@ http {
       fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
     
-  if (!-e $request_filename){
-    location ~ /api {
-      rewrite ^/(.*)$ /api.php?/$1 last;break;
+    if (!-e $request_filename){
+      location ~ /api {
+        rewrite ^/(.*)$ /api.php?/$1 last;break;
+      }
     }
-    location ~ /boxoffice {
-      rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
+    if (!-e $request_filename){
+      location ~ /boxoffice {
+        rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
+      }
     }
-  }
+    if (!-e $request_filename){
+      location ~ /boards {
+        rewrite ^/(.*)$ /boards.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /checkout {
+        rewrite ^/(.*)$ /checkout.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /eTicket {
+        rewrite ^/(.*)$ /eTicket.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /feeds2 {
+        rewrite ^/(.*)$ /feeds2.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /buy {
+        rewrite ^/(.*)$ /buy.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /event {
+        rewrite ^/(.*)$ /event.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /event_tracker {
+        rewrite ^/(.*)$ /event_tracker.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /help {
+        rewrite ^/(.*)$ /help.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /mobile {
+        rewrite ^/(.*)$ /mobile.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /news {
+        rewrite ^/(.*)$ /news.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /seating_charts {
+        rewrite ^/(.*)$ /seating_charts.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /sell {
+        rewrite ^/(.*)$ /sell.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /staff {
+        rewrite ^/(.*)$ /staff.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /widgets {
+        rewrite ^/(.*)$ /widgets.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /venue {
+        rewrite ^/(.*)$ /venue.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /user {
+        rewrite ^/(.*)$ /user.php?/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /venues/tools {
+        rewrite ^/(.*)$ /venues/?tools&/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /rss {
+        rewrite ^/(.*)$ /feeds2/events/rss/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /rss_user {
+        rewrite ^/(.*)$ /feeds2/events/rss_user/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /ics {
+        rewrite ^/(.*)$ /feeds2/events/ics/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /ics_user {
+        rewrite ^/(.*)$ /feeds2/events/ics_user/$1 last;break;
+      }
+    }
+    if (!-e $request_filename){
+      location ~ /ics_single {
+        rewrite ^/(.*)$ /feeds2/events/ics_single/$1 last;break;
+      }
+    }
 
-
-    
-    
   }
 }
