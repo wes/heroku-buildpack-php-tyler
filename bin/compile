@@ -22,6 +22,7 @@ MCRYPT_FILE="libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
 NEWRELIC_FILE="newrelic-${NEWRELIC_VERSION}-heroku.tar.gz"
+PEARLIB_FILE="pearfiles.tar.gz"
 
 MANIFEST_URL="${S3_URL}/${MANIFEST_FILE}"
 NGINX_URL="${S3_URL}/${NGINX_FILE}"
@@ -30,6 +31,7 @@ MEMCACHED_URL="${S3_URL}/${MEMCACHED_FILE}"
 PHP_URL="${S3_URL}/${PHP_FILE}"
 NEWRELIC_URL="${S3_URL}/${NEWRELIC_FILE}"
 COMPOSER_URL="http://getcomposer.org/composer.phar"
+PEAR_LIB="${S3_URL}/${PEARLIB_FILE}"
 #
 
 function indent() {
@@ -217,6 +219,13 @@ cp -a $LP_DIR/conf/etc.d ${BUILD_DIR}/vendor/php/
 cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
+
+echo "-----> Instlaling PEAR Libraries for HMT Mofo"
+
+cd /app/vendor/php/lib/php/PEAR/
+download_url ${PEAR_LIB}
+tar -xvf pearfiles.tar.gz
+rm pearfiles.tar.gz
 
 echo "-----> Installing boot script"
 cd $BUILD_DIR
