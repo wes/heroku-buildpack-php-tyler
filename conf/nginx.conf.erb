@@ -232,5 +232,10 @@ http {
     
     rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
+    location ~ /(apps/console|apps/cronjobs) {
+      deny all;
+      return 404;
+    }
+
   }
 }
