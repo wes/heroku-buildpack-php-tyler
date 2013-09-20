@@ -115,7 +115,18 @@ location = /api {
   }
 }
 
+location = /api/ {
+  if (!-e $request_filename){
+    rewrite ^/(.*)$ /api.php?/$1 last;break;
+  }
+}
+
 location = /boxoffice {
+  if (!-e $request_filename){
+    rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
+  }
+}
+location = /boxoffice/ {
   if (!-e $request_filename){
     rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
   }
