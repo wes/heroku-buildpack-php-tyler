@@ -222,7 +222,7 @@ cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 
 echo "-----> Instlaling PEAR Libraries for HMT Mofo"
 
-cd /app/vendor/php/lib/php/PEAR/
+cd ${BUILD_DIR}/vendor/php/lib/php/PEAR
 download_url ${PEAR_LIB}
 tar -xvf pearfiles.tar.gz
 rm pearfiles.tar.gz
