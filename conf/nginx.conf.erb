@@ -109,123 +109,123 @@ http {
       fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
     
-    if (!-e $request_filename){
-      location ~ /api {
+    location ~ /api {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /api.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /boxoffice {
+    location ~ /boxoffice {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /boards {
+    location ~ /boards {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /boards.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /checkout {
+    location ~ /checkout {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /checkout.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /eTicket {
+    location ~ /eTicket {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /eTicket.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /feeds2 {
+    location ~ /feeds2 {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /feeds2.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /buy {
+    location ~ /buy {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /buy.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /event {
+    location ~ /event {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /event.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /event_tracker {
+    location ~ /event_tracker {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /event_tracker.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /help {
+    location ~ /help {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /help.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /mobile {
+    location ~ /mobile {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /mobile.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /news {
+    location ~ /news {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /news.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /seating_charts {
+    location ~ /seating_charts {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /seating_charts.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /sell {
+    location ~ /sell {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /sell.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /staff {
+    location ~ /staff {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /staff.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /widgets {
+    location ~ /widgets {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /widgets.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /venue {
+    location ~ /venue {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /venue.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /user {
+    location ~ /user {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /user.php?/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /venues/tools {
+    location ~ /venues/tools {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /venues/?tools&/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /rss {
+    location ~ /rss {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /feeds2/events/rss/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /rss_user {
+    location ~ /rss_user {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /feeds2/events/rss_user/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /ics {
+    location ~ /ics {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /feeds2/events/ics/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /ics_user {
+    location ~ /ics_user {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /feeds2/events/ics_user/$1 last;break;
       }
     }
-    if (!-e $request_filename){
-      location ~ /ics_single {
+    location ~ /ics_single {
+      if (!-e $request_filename){
         rewrite ^/(.*)$ /feeds2/events/ics_single/$1 last;break;
       }
     }
