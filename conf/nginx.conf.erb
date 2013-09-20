@@ -231,7 +231,7 @@ http {
     }
     
     location ~ /min {
-      rewrite ^/([bfg]=.*) /min/index.php?$1 break;
+      rewrite ^/(.*)$ /min/?$1 break;
     }
 
   }
