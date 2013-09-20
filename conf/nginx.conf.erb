@@ -109,17 +109,15 @@ http {
       fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
     
-location ~ /api {
   if (!-e $request_filename){
-    rewrite ^/(.*)$ /api.php?/$1 last;break;
+    location ~ /api {
+      rewrite ^/(.*)$ /api.php?/$1 last;break;
+    }
+    location ~ /boxoffice {
+      rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
+    }
   }
-}
 
-location ~ /boxoffice {
-  if (!-e $request_filename){
-    rewrite ^/(.*)$ /boxoffice.php?/$1 last;break;
-  }
-}
 
     
     
