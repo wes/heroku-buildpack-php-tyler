@@ -108,5 +108,243 @@ http {
       fastcgi_pass    php_fpm;
       fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
+    
+    
+    
+    
+    
+    
+    location / {
+  if (!-e $request_filename){
+    rewrite ^/api/(.*)$ /api.php/$1 break;
+  }
+  rewrite ^/([bfg]=.*) /index.php?$1 break;
+  if (!-e $request_filename){
+    rewrite ^/(.*).ics$ /ics.php?venue_id=$1 break;
+  }
+}
+
+location = /api {
+  rewrite ^(.*)$ /api.php break;
+}
+
+location /boxoffice/ {
+  alias /boxoffice.php/;
+}
+
+location = /boxoffice {
+  rewrite ^(.*)$ /boxoffice.php break;
+}
+
+location /boards/ {
+  alias /boards.php/;
+}
+
+location = /boards {
+  rewrite ^(.*)$ /boards.php break;
+}
+
+location /boxoffice_mobile/ {
+  alias /apps/boxoffice_mobile/;
+}
+
+location = /boxoffice_mobile {
+  rewrite ^(.*)$ /apps/boxoffice_mobile/ break;
+}
+
+location /checkout/ {
+  alias /checkout.php/;
+}
+
+location = /checkout {
+  rewrite ^(.*)$ /checkout.php break;
+}
+
+location /eTicket/ {
+  alias /eTicket.php/;
+}
+
+location = /eTicket {
+  rewrite ^(.*)$ /eTicket.php break;
+}
+
+location /feeds2/ {
+  alias /feeds2.php/;
+}
+
+location = /feeds2 {
+  rewrite ^(.*)$ /feeds2.php break;
+}
+
+location /buy/ {
+  alias /buy.php/;
+}
+
+location = /buy {
+  rewrite ^(.*)$ /buy.php break;
+}
+
+location /event/ {
+  alias /event.php/;
+}
+
+location = /event {
+  rewrite ^(.*)$ /event.php break;
+}
+
+location /event_tracker/ {
+  alias /event_tracker.php/;
+}
+
+location = /event_tracker {
+  rewrite ^(.*)$ /event_tracker.php break;
+}
+
+location /help/ {
+  alias /help.php/;
+}
+
+location = /help {
+  rewrite ^(.*)$ /help.php break;
+}
+
+location /mobile/ {
+  alias /mobile.php/;
+}
+
+location = /mobile {
+  rewrite ^(.*)$ /mobile.php break;
+}
+
+location /news/ {
+  alias /news.php/;
+}
+
+location = /news {
+  rewrite ^(.*)$ /news.php break;
+}
+
+location /seating_charts/ {
+  alias /seating_charts.php/;
+}
+
+location = /seating_charts {
+  rewrite ^(.*)$ /seating_charts.php break;
+}
+
+location /sell/ {
+  alias /sell.php/;
+}
+
+location = /sell {
+  rewrite ^(.*)$ /sell.php break;
+}
+
+location /staff/ {
+  alias /staff.php/;
+}
+
+location = /staff {
+  rewrite ^(.*)$ /staff.php break;
+}
+
+location /widgets/ {
+  alias /widgets.php/;
+}
+
+location = /widgets {
+  rewrite ^(.*)$ /widgets.php break;
+}
+
+location = /venue {
+  rewrite ^(.*)$ /venue.php break;
+}
+
+location /user/ {
+  alias /user.php/;
+}
+
+location = /user {
+  rewrite ^(.*)$ /user.php break;
+}
+
+location /venues {
+  rewrite ^/venues/tools/(.*)$ /venues/?scn=tools&/$1 break;
+}
+
+location = /venues/tools {
+  rewrite ^(.*)$ /venues/?scn=tools break;
+  rewrite ^(.*)$ /venues/?scn=tools break;
+}
+
+location /rss/ {
+  alias /feeds2/events/rss/;
+}
+
+location /rss_user/ {
+  alias /feeds2/events/rss_user/;
+}
+
+location /ics/ {
+  alias /feeds2/events/ics/;
+}
+
+location /ics_user/ {
+  alias /feeds2/events/ics_user/;
+}
+
+location /ics_single/ {
+  alias /feeds2/events/ics_single/;
+}
+
+location ~ ^\.([Hh][Tt]|[Dd][Ss]_[Ss]|[_]) {
+  deny all;
+}
+
+location /app/www {
+  autoindex off;
+  allow all;
+}
+
+location /app/www/apps/console {
+  allow all;
+  deny all;
+}
+
+location /app/www/apps/cronjobs {
+  allow all;
+  deny all;
+}
+
+location /app/www/hmt-mobile {
+  allow all;
+  deny all;
+}
+
+location /app/www/global/js/lib/tiny_mce/plugins/jbimages/ci/application {
+  allow all;
+  deny all;
+}
+
+location /app/www/global/js/lib/tiny_mce/plugins/jbimages/ci/system {
+  allow all;
+  deny all;
+}
+
+location /app/www/feeds/templates_disabled {
+  allow all;
+  deny all;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   }
 }
