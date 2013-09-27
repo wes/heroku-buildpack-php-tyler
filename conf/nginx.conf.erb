@@ -201,7 +201,7 @@ http {
     }
     location ~ /venues/tools {
       if (!-e $request_filename){
-        rewrite ^/(.*)$ /venues/?scn=tools last;break;
+        rewrite ^/(.*)$ /venues/?scn=tools/$1 last;break;
       }
     }
     location ~ /rss {
