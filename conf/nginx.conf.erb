@@ -232,7 +232,7 @@ http {
     
     rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
-    location /apps/console/* {
+    location ~ /apps/console/* {
       deny all;
       return 404;
     }
