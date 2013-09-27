@@ -199,9 +199,9 @@ http {
         rewrite ^/(.*)$ /user.php?/$1 last;break;
       }
     }
-    location ~ /venues/tools/ {
+    location ~ /venues/tools {
       if (!-e $request_filename){
-        rewrite ^/(.*)$ /venues/index.php?scn=tools/$1 last;break;
+        rewrite ^/(.*)$ /venues/tools.php?/$1 last;break;
       }
     }
     location ~ /rss {
