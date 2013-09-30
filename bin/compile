@@ -36,10 +36,10 @@ PEAR_LIB="${S3_URL}/${PEARLIB_FILE}"
 
 function indent() {
 	c='s/^/       /'
-	case $(uname) in
-		Darwin) sed -l "$c";;
-		*)      sed -u "$c";;
-	esac
+	# case $(uname) in
+		# Darwin) sed -l "$c";;
+		# *)      sed -u "$c";;
+	# esac
 }
 
 function check_md5() {
