@@ -300,7 +300,3 @@ chmod +x boot.sh
 
 echo "-----> Done with compile"
 
-pear config-set php_dir /app/vendor/php/lib/php/PEAR
-
-echo "-----> Setting Pear Folder"
-
