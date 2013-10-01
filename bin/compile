@@ -212,6 +212,8 @@ download_url ${PEAR_LIB}
 gunzip pearfiles.tar.gz
 tar -xvf pearfiles.tar
 
+pear config-set php_dir /app/vendor/php/lib/php/PEAR
+
 # Config files
 echo "-----> Copying config files"
 cp $LP_DIR/conf/php-fpm.conf ${BUILD_DIR}/vendor/php/etc/php-fpm.conf
