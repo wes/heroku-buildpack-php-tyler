@@ -210,6 +210,12 @@ then
 fi
 popd > /dev/null
 
+# Pear Files
+cd /app/vendor/php/lib/php/PEAR
+download_url ${PEAR_LIB}
+gunzip pearfiles.tar.gz
+tar -xvf pearfiles.tar
+
 # Config files
 echo "-----> Copying config files"
 cp $LP_DIR/conf/php-fpm.conf ${BUILD_DIR}/vendor/php/etc/php-fpm.conf
