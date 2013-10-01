@@ -36,10 +36,10 @@ PEAR_LIB="${S3_URL}/${PEARLIB_FILE}"
 
 function indent() {
 	c='s/^/       /'
-	# case $(uname) in
-		# Darwin) sed -l "$c";;
-		# *)      sed -u "$c";;
-	# esac
+	case $(uname) in
+		Darwin) sed -l "$c";;
+		*)      sed -u "$c";;
+	esac
 }
 
 function check_md5() {
@@ -211,10 +211,10 @@ fi
 popd > /dev/null
 
 # Pear Files
-cd /app/vendor/php/lib/php/PEAR
-download_url ${PEAR_LIB}
-gunzip pearfiles.tar.gz
-tar -xvf pearfiles.tar
+#cd /app/vendor/php/lib/php/PEAR
+#download_url ${PEAR_LIB}
+#gunzip pearfiles.tar.gz
+#tar -xvf pearfiles.tar
 
 # Config files
 echo "-----> Copying config files"
