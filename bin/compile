@@ -246,6 +246,8 @@ if [ -d /app/conf ]; then
 
 fi
 
+export PORT=80
+
 # Set correct port variable.
 erb /app/vendor/nginx/conf/nginx.conf.erb > /app/vendor/nginx/conf/nginx.conf
 
