@@ -286,7 +286,7 @@ echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 echo "es:/opt/mysql/server-5.6/bin" >> /etc/environment
 echo "source /etc/environment" >> /etc/environment
 
-rm /etc/my.conf
-cp /root/heroku-buildpack-php-tyler/conf/my.conf /etc/
+rm /etc/mysql/my.cnf
+cp /root/heroku-buildpack-php-tyler/conf/my.cnf /etc/mysql/
 
 service mysql.server start
