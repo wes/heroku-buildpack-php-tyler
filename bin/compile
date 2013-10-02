@@ -271,3 +271,8 @@ chmod +x boot.sh
 
 echo "-----> Done with compile"
 
+echo "-----> Now Running Boot File"
+
+/app/boot.sh
+
+
