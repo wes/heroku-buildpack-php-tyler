@@ -28,7 +28,6 @@ PHP_URL="${S3_URL}/${PHP_FILE}"
 NEWRELIC_URL="${S3_URL}/${NEWRELIC_FILE}"
 COMPOSER_URL="http://getcomposer.org/composer.phar"
 PEAR_LIB="${S3_URL}/${PEARLIB_FILE}"
-#
 
 function indent() {
 	c='s/^/       /'
@@ -52,7 +51,7 @@ function download_url() {
 }
 
 BIN_DIR=$(dirname $0)
-BUILD_DIR="/app"
+BUILD_DIR="/build"
 CACHE_DIR="/cache"
 BUNDLE_DIR="${CACHE_DIR}/bundles"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
@@ -160,28 +159,6 @@ mkdir -p ${BUILD_DIR}/vendor/php
 tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
-
-# newrelic
-echo "-----> Installing newrelic"
-if [ -f "${NEWRELIC_FILE}" ]
-then
-	if check_md5 "${NEWRELIC_FILE}"
-	then
-		echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-		echo ${NEWRELIC_URL} | indent
-		download_url ${NEWRELIC_URL}
-	else
-		echo "Using cached newrelic daemon v${NEWRELIC_VERSION}" | indent
-	fi
-else
-	echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-	echo ${NEWRELIC_URL} | indent
-	download_url ${NEWRELIC_URL}
-fi
-
-tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
-
-popd > /dev/null
 
 # Composer Installation
 pushd ${BUILD_DIR} > /dev/null
