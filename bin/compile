@@ -274,19 +274,32 @@ echo "-----> Done with compile"
 
 echo "-----> Now Installing Local Mysql Server"
 
-cd /root/
-wget http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb
-dpkg -i  mysql-5.6.14-debian6.0-x86_64.deb
+/etc/init.d/apparmor stop
+update-rc.d -f apparmor remove
+apt-get remove apparmor apparmor-utils
+
+groupadd mysql
+useradd -r -g mysql mysql
+
 apt-get install libaio1
-cp /opt/mysql/server-5.6/support-files/mysql.server /etc/init.d/mysql.server
-update-rc.d -f mysql remove
+
+cd /usr/local/
+wget http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.14-linux-glibc2.5-x86_64.tar.gz
+
+tar xvfz mysql-5.6.14-linux-glibc2.5-x86_64.tar.gz
+mv mysql-5.6.14-linux-glibc2.5-x86_64 mysql
+cd mysql
+chown -R mysql .
+chgrp -R mysql .
+scripts/mysql_install_db --user=mysql
+chown -R root .
+chown -R mysql data
+cp support-files/mysql.server /etc/init.d/mysql.server
+/etc/init.d/mysql.server start
 update-rc.d mysql.server defaults
+ln -s /usr/local/mysql/bin/* /usr/local/bin/
+mysql_secure_installation
 
-echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"' > /etc/environment
-echo "es:/opt/mysql/server-5.6/bin" >> /etc/environment
-echo "source /etc/environment" >> /etc/environment
+echo "-----> Now Finished MySQL Install"
 
-rm /etc/mysql/my.cnf
-cp /root/heroku-buildpack-php-tyler/conf/my.cnf /etc/mysql/
-
-service mysql.server start
+echo "-----> Finished Compiling, Now Run /app/boot.sh"
