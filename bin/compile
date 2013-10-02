@@ -51,7 +51,7 @@ function download_url() {
 }
 
 BIN_DIR=$(dirname $0)
-BUILD_DIR="/build"
+BUILD_DIR="/app"
 CACHE_DIR="/cache"
 BUNDLE_DIR="${CACHE_DIR}/bundles"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
