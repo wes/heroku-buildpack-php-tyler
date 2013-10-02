@@ -271,8 +271,22 @@ chmod +x boot.sh
 
 echo "-----> Done with compile"
 
-echo "-----> Now Running Boot File"
 
-/app/boot.sh
+echo "-----> Now Installing Local Mysql Server"
 
+cd /root/
+wget http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb
+dpkg -i  mysql-5.6.14-debian6.0-x86_64.deb
+apt-get install libaio1
+cp /opt/mysql/server-5.6/support-files/mysql.server /etc/init.d/mysql.server
+update-rc.d -f mysql remove
+update-rc.d mysql.server defaults
 
+echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"' > /etc/environment
+echo "es:/opt/mysql/server-5.6/bin" >> /etc/environment
+echo "source /etc/environment" >> /etc/environment
+
+rm /etc/my.conf
+cp /root/heroku-buildpack-php-tyler/conf/my.conf /etc/
+
+service mysql.server start
