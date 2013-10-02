@@ -58,6 +58,12 @@ BUNDLE_DIR="${CACHE_DIR}/bundles"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 export COMPOSER_HOME="${CACHE_DIR}/.composer"
 
+echo $BUILD_DIR
+
+echo ""
+exit
+
+
 # include .files when moving things around
 shopt -s dotglob
 
