@@ -302,4 +302,4 @@ mysql_secure_installation
 
 echo "-----> Now Finished MySQL Install"
 
-echo "-----> Finished Compiling, Now Run /app/boot.sh"
+echo "-----> Finished Compiling"
