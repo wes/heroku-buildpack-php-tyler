@@ -31,12 +31,12 @@ http {
     server unix:/tmp/php-fpm.socket;
   }
 
-  root              /app/;
+  root              /vagrant/;
   index             index.php index.html index.htm;
 
   server {
     listen            <%= ENV['PORT'] %>;
-    server_name       _;
+    server_name       holdmyticket.loc;
 
     # Some basic cache-control for static files to be sent to the browser
     location ~* \.(?:ico|css|js|gif|jpeg|jpg|png)$ {
