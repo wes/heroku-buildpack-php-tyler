@@ -301,7 +301,7 @@ ln -s /usr/local/mysql/bin/* /usr/local/bin/
 aptitude -y install expect
  
 // Not required in actual script
-MYSQL_ROOT_PASSWORD=abcd1234
+MYSQL_ROOT_PASSWORD=root
  
 SECURE_MYSQL=$(expect -c "
  
