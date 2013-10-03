@@ -2,6 +2,7 @@
 # Usage: bin/compile <build-dir> <cache-dir>
 
 apt-get -y install ruby
+apt-get -y install emacs
 
 set -e
 set -o pipefail

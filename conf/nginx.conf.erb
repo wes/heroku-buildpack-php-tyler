@@ -111,7 +111,7 @@ http {
     
     location / {
       if (!-e $request_filename){
-        rewrite ^/(.*)$ /index.php last;break;
+        rewrite ^/(.*)$ /index.php?/$1 last;break;
       }
     }
 
