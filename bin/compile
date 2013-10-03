@@ -275,12 +275,12 @@ echo "-----> Now Installing Local Mysql Server"
 
 /etc/init.d/apparmor stop
 update-rc.d -f apparmor remove
-apt-get remove apparmor apparmor-utils
+apt-get -y remove apparmor apparmor-utils
 
 groupadd mysql
 useradd -r -g mysql mysql
 
-apt-get install libaio1
+apt-get -y install libaio1
 
 cd /usr/local/
 wget http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.14-linux-glibc2.5-x86_64.tar.gz
@@ -297,8 +297,6 @@ cp support-files/mysql.server /etc/init.d/mysql.server
 /etc/init.d/mysql.server start
 update-rc.d mysql.server defaults
 ln -s /usr/local/mysql/bin/* /usr/local/bin/
-
-
 
 aptitude -y install expect
  
