@@ -35,7 +35,7 @@ http {
   index             index.php index.html index.htm;
 
   server {
-    listen            80;
+    listen            <%= ENV['PORT'] %>;
     server_name       holdmyticket.loc;
 
     # Some basic cache-control for static files to be sent to the browser
@@ -108,7 +108,7 @@ http {
       fastcgi_pass    php_fpm;
       fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
-
+    
     location ~ /api {
       if (!-e $request_filename){
         rewrite ^/(.*)$ /api.php?/$1 last;break;
@@ -229,7 +229,7 @@ http {
         rewrite ^/(.*)$ /feeds2/events/ics_single/$1 last;break;
       }
     }
-
+    
     rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
     location ^~ /apps/console/ {
