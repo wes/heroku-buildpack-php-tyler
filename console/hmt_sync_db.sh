@@ -5,7 +5,10 @@ echo 'Creating tmp folder in vagrant folder to save space.'
 mkdir /vagrant/.tmp/
 
 echo 'Dumping Live Read Replica DB To File'
-mysqldump -h hmtread.ctycy1cg9bsq.us-east-1.rds.amazonaws.com -P 3306 -u holdmyticket -p holdmyticket > /vagrant/.tmp/holdmyticket.sql
+scp root@162.243.16.64:/home/latest.sql.gz /vagrant/.tmp/holdmyticket.sql.gz
+
+echo 'Unzipping Archive'
+gunzip /vagrant/.tmp/holdmyticket.sql.gz
 
 echo 'Creating Local Database'
 mysqladmin -u root -proot create holdmyticket
