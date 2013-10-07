@@ -230,7 +230,7 @@ http {
       }
     }
 
-    location ^~ /uploads/ {
+    location ~* \.(?:ico|css|js|gif|jpeg|jpg|png)$ {
       rewrite ^/(.*)$ /redirector.php?$1 last;break;
     }
 
