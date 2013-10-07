@@ -231,6 +231,12 @@ http {
       }
     }
     
+    location ~ /uploads {
+      if (!-e $request_filename){
+        rewrite ^/(.*)$ /redirector.php?$1 last;break;
+      }
+    }
+
     rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
     location ^~ /apps/console/ {
