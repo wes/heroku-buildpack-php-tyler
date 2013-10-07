@@ -229,6 +229,12 @@ http {
         rewrite ^/(.*)$ /feeds2/events/ics_single/$1 last;break;
       }
     }
+
+    location ~ /uploads {
+      if (!-e $request_filename){
+        rewrite ^/(.*)$ /redirector.php?$1 last;break;
+      }
+    }
     
     rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
