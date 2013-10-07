@@ -302,4 +302,10 @@ mysql_secure_installation
 
 echo "-----> Now Finished MySQL Install"
 
+echo "-----> Installing Local Redis Server"
+
+apt-get install redis-server
+
+echo "-----> Finished Installing Redis"
+
 echo "-----> Finished Compiling"
