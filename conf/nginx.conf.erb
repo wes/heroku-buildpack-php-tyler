@@ -230,7 +230,7 @@ http {
       }
     }
 
-    location ~ /uploads {
+    location ^~ /uploads {
       if (!-e $request_filename){
         rewrite ^/(.*)$ /redirector.php last;break;
       }
