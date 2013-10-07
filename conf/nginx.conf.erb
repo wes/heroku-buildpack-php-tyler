@@ -230,10 +230,10 @@ http {
       }
     }
 
-    location ~ /uploads {
-        rewrite ^/(.*)$ /redirector.php?/$1 last;break;
+    location ^~ /uploads/ {
+      rewrite ^/(.*)$ /redirector.php?$1 last;break;
     }
-    
+
     rewrite ^/min/([a-z]=.*) /min/index.php?$1 last;
 
     location ^~ /apps/console/ {
