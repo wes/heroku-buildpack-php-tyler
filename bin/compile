@@ -309,3 +309,7 @@ apt-get install redis-server
 echo "-----> Finished Installing Redis"
 
 echo "-----> Finished Compiling"
+
+echo "-----> If you need to import a fresh copy of the DB run this script: /root/heroku-buildpack-php-tyler/console/hmt_sync_db.sh"
+
+echo "-----> When ready to get going, just launch the /app/boot.sh"
