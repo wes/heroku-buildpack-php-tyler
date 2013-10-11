@@ -304,6 +304,19 @@ mysql_secure_installation
 
 echo "-----> Now Finished MySQL Install"
 
+echo "-----> Setting up Symlinks"
+
+ln -s /vagrant/global /app/global
+ln -s /vagrant/admin /app/admin
+ln -s /vagrant/apps /app/apps
+
+echo "-----> Fixing Permissions on Folders"
+
+chmod 775 /app/vendor/php/bin /app/vendor/php/etc /app/vendor/php/etc.d /app/vendor/php/include /app/vendor/php/lib /app/vendor/php/php /app/vendor/php/sbin /app/vendor/php/var /app/vendor/php/lib/php
+
+chmod -R a+r /app/vendor/php/lib/php
+chmod -R g+r /app/vendor/php/lib/php
+
 echo "-----> Installing Local Redis Server"
 
 apt-get install redis-server
