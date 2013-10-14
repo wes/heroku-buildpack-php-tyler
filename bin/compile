@@ -287,7 +287,6 @@ if [ "\${NEW_RELIC_LICENSE_KEY}" ]; then
 fi
 /app/vendor/php/sbin/php-fpm
 /app/vendor/nginx/sbin/nginx
-/app/vendor/php/bin/php /app/hooks/post_deploy_redis_minify_clear.php
 EOF
 chmod +x boot.sh
 
