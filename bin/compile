@@ -261,9 +261,9 @@ if [ -d /app/conf/nginx.d ]; then
 fi
 
 # Set NEWRELIC key
-#if [ -x "/app/local/bin/newrelic-license" ]; then
-#	/app/local/bin/newrelic-license
-#fi
+if [ -x "/app/local/bin/newrelic-license" ]; then
+	/app/local/bin/newrelic-license
+fi
 
 # Preserve current php-fpm.conf so that env list does
 # not go out of hand across restarts.
