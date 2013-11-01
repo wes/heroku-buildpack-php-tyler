@@ -292,4 +292,3 @@ EOF
 chmod +x boot.sh
 
 echo "-----> Done with compile"
-

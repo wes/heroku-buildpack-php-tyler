@@ -39,7 +39,7 @@ http {
     server_name       _;
 
     # Some basic cache-control for static files to be sent to the browser
-    location ~* \.(?:ico|css|js|gif|jpeg|jpg|png)$ {
+    location ~* \.(?:ico|css|less|js|gif|jpeg|jpg|png)$ {
       expires         max;
       add_header      Pragma public;
       add_header      Cache-Control "public, must-revalidate, proxy-revalidate";
