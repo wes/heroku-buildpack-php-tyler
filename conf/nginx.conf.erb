@@ -1,5 +1,5 @@
 # setting worker_processes to CPU core count
-worker_processes      1;
+worker_processes      3;
 daemon off;
 
 events {
@@ -16,6 +16,9 @@ http {
   access_log          on;
   error_log           logs/error.log;
   proxy_max_temp_file_size	0;
+
+  client_max_body_size 5m;
+
   #fastcgi_max_temp_file_size	0;
   limit_conn_zone $binary_remote_addr zone=phplimit:1m; # define a limit bucket for PHP-FPM
   # don't use server listen port in redirects.
@@ -40,7 +43,9 @@ http {
 
     # Some basic cache-control for static files to be sent to the browser
     location ~* \.(?:ico|css|less|js|gif|jpeg|jpg|png)$ {
-      expires         max;
+      expires         360d;
+      access_log      off;
+      log_not_found   off;
       add_header      Pragma public;
       add_header      Cache-Control "public, must-revalidate, proxy-revalidate";
     }
