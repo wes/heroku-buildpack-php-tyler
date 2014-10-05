@@ -285,7 +285,7 @@ useradd -r -g mysql mysql
 apt-get -y install libaio1
 
 cd /usr/local/
-wget https://downloads.skysql.com/archives/mysql-5.6/mysql-5.6.14-linux-glibc2.5-x86_64.tar.gz
+wget https://downloads.mariadb.com/archives/mysql-5.6/mysql-5.6.14-linux-glibc2.5-x86_64.tar.gz
 
 tar xvfz mysql-5.6.14-linux-glibc2.5-x86_64.tar.gz
 mv mysql-5.6.14-linux-glibc2.5-x86_64 mysql
