@@ -9,7 +9,7 @@ NGINX_VERSION=1.4.1
 LIBMCRYPT_VERSION=2.5.8
 LIBMEMCACHED_VERSION=1.0.7
 PHP_VERSION=5.4.17
-NEWRELIC_VERSION=2.9.5.78
+NEWRELIC_VERSION=4.333
 S3_URL="https://s3.amazonaws.com/s3.hmt.fm"
 
 MANIFEST_FILE="manifest.md5sum"
@@ -17,7 +17,7 @@ NGINX_FILE="nginx-${NGINX_VERSION}-heroku.tar.gz"
 MCRYPT_FILE="libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
-NEWRELIC_FILE="newrelic-${NEWRELIC_VERSION}-heroku.tar.gz"
+NEWRELIC_FILE="newrelic-php5-4.14.0.72-linux.tar.gz"
 PEARLIB_FILE="pearfiles.tar.gz"
 
 MANIFEST_URL="${S3_URL}/${MANIFEST_FILE}"
