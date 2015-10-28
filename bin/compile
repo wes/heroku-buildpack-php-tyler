@@ -183,6 +183,28 @@ tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
 
 popd > /dev/null
 
+# Composer Installation
+pushd ${BUILD_DIR} > /dev/null
+if [ -f "composer.json" ]
+then
+	echo "-----> Installing dependencies using Composer"
+	GIT_DIR_ORIG=${GIT_DIR}
+	unset GIT_DIR
+
+	if [ ! -f "composer.phar" ]
+	then
+		echo "Fetching composer.phar" | indent
+		echo ${COMPOSER_URL} | indent
+		download_url ${COMPOSER_URL}
+	fi
+
+	# do the deed!
+	echo "Running: php composer.phar install" | indent
+	LD_LIBRARY_PATH="${BUILD_DIR}/local/lib" ${BUILD_DIR}/vendor/php/bin/php composer.phar install -n | indent
+
+	export GIT_DIR=${GIT_DIR_ORIG}
+fi
+popd > /dev/null
 
 # Config files
 echo "-----> Copying config files"
