@@ -27,7 +27,7 @@ curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYP
 
 echo "+ Fetching PHP sources..."
 #fetch php, extract
-curl -L http://us.php.net/get/php-$PHP_VERSION.tar.bz2/from/www.php.net/mirror -o - | tar xj
+curl -L http://php.net/distributions/php-$PHP_VERSION.tar.bz2 -o - | tar xj
 
 pushd php-$PHP_VERSION
 
@@ -140,4 +140,3 @@ echo ${PHP_VERSION} > /app/vendor/php/VERSION
 popd
 
 echo "+ Done!"
-
