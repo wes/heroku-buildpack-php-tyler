@@ -323,8 +323,15 @@ apt-get install redis-server
 
 echo "-----> Finished Installing Redis"
 
+echo "-----> Setting up MySQL Permissions"
+
+echo "update user SET Host = '10.0.0.1' WHERE Host = '127.0.0.1';" > /tmp/mysqlimport
+mysql -u root -proot -h localhost mysql < /tmp/mysqlimport
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
+rm /tmp/mysqlimport
+
 echo "-----> Finished Compiling"
 
-echo "-----> If you need to import a fresh copy of the DB run this script: /root/heroku-buildpack-php-tyler/console/hmt_sync_db.sh"
+echo "\n\n"
 
-echo "-----> When ready to get going, just launch the /app/boot.sh"
+echo "You should stop your vagrant machine and create the new drive per instructions for the database.\n\n"
