@@ -25,9 +25,17 @@ echo "+ Fetching freetype libraries..."
 mkdir -p /app/local
 curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/local
 
+# download openssl
+mkdir -p /app/local/openssl
+pushd /app/local/openssl
+wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
+gunzip openssl-1.0.1p.tar.gz
+tar -xvf openssl-1.0.1p.tar
+popd
+
 echo "+ Fetching PHP sources..."
 #fetch php, extract
-curl -L http://us.php.net/get/php-$PHP_VERSION.tar.bz2/from/www.php.net/mirror -o - | tar xj
+curl -L http://php.net/distributions/php-$PHP_VERSION.tar.bz2 -o - | tar xj
 
 pushd php-$PHP_VERSION
 
@@ -59,13 +67,14 @@ echo "+ Configuring PHP..."
 --with-mhash \
 --with-mysql \
 --with-mysqli \
---with-openssl \
+--with-openssl=/usr \
 --with-pcre-regex \
 --with-pdo-mysql \
 --with-pgsql \
 --with-pdo-pgsql \
 --with-png-dir \
 --with-freetype-dir=/app/local \
+--with-libdir=lib/x86_64-linux-gnu \
 --with-zlib
 
 echo "+ Compiling PHP..."
@@ -137,7 +146,10 @@ echo "+ Packaging PHP..."
 # package PHP
 echo ${PHP_VERSION} > /app/vendor/php/VERSION
 
+pushd /app/vendor/php
+
+tar czf /vagrant/_compiled/php-${PHP_VERSION}-with-fpm-heroku.tar.gz .
+
 popd
 
 echo "+ Done!"
-
