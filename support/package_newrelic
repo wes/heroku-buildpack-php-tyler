@@ -54,7 +54,7 @@ popd
 
 popd
 
-cp $tempdir/newrelic-${NEWRELIC_VERSION}-heroku.tar.gz .
+mv $tempdir/newrelic-${NEWRELIC_VERSION}-heroku.tar.gz /vagrant/_compiled/
 
 echo "+ Binaries available at ./newrelic-${NEWRELIC_VERSION}-heroku.tar.gz."
 echo "+ Upload this package to Amazon S3."
