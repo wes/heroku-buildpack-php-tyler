@@ -1,3 +1,4 @@
+/etc/init.d/mysql.server stop
 mv /usr/local/mysql/data/* /db/
 rm -rf /usr/local/mysql/data
 ln -s /db /usr/local/mysql/data
