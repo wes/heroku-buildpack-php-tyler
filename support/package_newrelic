@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./set-env.sh
+
 set -e
 
 if [ "$NEWRELIC_VERSION" == "" ]; then
@@ -19,13 +21,31 @@ pushd $tempdir
 # download and extract
 curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" -o - | tar xz
 pushd newrelic-php5-${NEWRELIC_VERSION}-linux
-mkdir -p $installdir/{bin,etc} $installdir/var/{run,log} $installdir/var/log/newrelic
+mkdir -p $installdir/{bin,etc,newrelic} $installdir/var/{run,log} $installdir/var/log/newrelic
+cp -a agent/ $installdir/newrelic/
+rm -Rf $installdir/newrelic/agent/x86/
 cp -f daemon/newrelic-daemon.x64 $installdir/bin/newrelic-daemon
 cp -f scripts/newrelic.cfg.template $installdir/etc/newrelic.cfg
-sed -i -e 's|var|app/local/var|g' $installdir/etc/newrelic.cfg
+sed -i -e 's|var|app/vendor/newrelic/var|g' $installdir/etc/newrelic.cfg
 sed -i -e 's|#ssl=false|ssl=true|g' $installdir/etc/newrelic.cfg
-curl -L "https://raw.github.com/gist/2767604/newrelic-license.sh" -o $installdir/bin/newrelic-license
+sed -i -e 's|#pidfile=|pidfile=|g' $installdir/etc/newrelic.cfg
+sed -i -e 's|#logfile=|logfile=|g' $installdir/etc/newrelic.cfg
+#curl -L "https://raw.github.com/gist/2767604/newrelic-license.sh" -o $installdir/bin/newrelic-license
+cat > $installdir/bin/newrelic-license <<EOF
+#!/usr/bin/env bash
+
+if [ -f /app/local/newrelic/NEWRELIC_VERSION ]; then
+	sed -i "s|REPLACE_WITH_REAL_KEY|\${NEW_RELIC_LICENSE_KEY}|g" /app/vendor/php/etc.d/*newrelic*.ini
+	# Deploy agent
+	cp -f /app/local/newrelic/agent/x64/newrelic-\`/app/vendor/php/bin/phpize --version | grep "Zend Module Api No" | tr -d ' ' | cut -f 2 -d ':'\`.so \`/app/vendor/php/bin/php-config --extension-dir\`/newrelic.so
+	rm -Rf /app/local/newrelic/agent/
+else
+	sed -i "s|REPLACE_WITH_REAL_KEY|\${NEW_RELIC_LICENSE_KEY}|g" /app/local/etc/newrelic.cfg
+fi
+EOF
+
 chmod +x $installdir/bin/newrelic-license
+echo "${NEWRELIC_VERSION}" > $installdir/newrelic/NEWRELIC_VERSION
 popd
 
 pushd $installdir
