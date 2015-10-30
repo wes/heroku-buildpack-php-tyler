@@ -13,7 +13,7 @@ NEWRELIC_VERSION=4.9.0.54
 S3_URL="https://s3.amazonaws.com/s3.hmt.fm/cedar14"
 
 MANIFEST_FILE="manifest.md5sum"
-NGINX_FILE="nginx-${NGINX_VERSION}-heroku.tar.gz"
+NGINX_FILE="nginx-${NGINX_VERSION}.tar.gz"
 MCRYPT_FILE="libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
