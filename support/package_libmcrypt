@@ -24,15 +24,11 @@ curl -L "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_V
 #vulcan build -v -s libmcrypt-$LIBMCRYPT_VERSION -o $tempdir/libmcrypt-$LIBMCRYPT_VERSION.tar.gz -p /app/local -c './configure --prefix=/app/local --disable-rpath && make install'
 
 rm -rf /app/vendor/libmcrypt
-
 mkdir -p /app/vendor/libmcrypt
-
-cd /app/vendor/libmcrypt
 
 ./configure --prefix=/app/vendor/libmcrypt --disable-rpath && make install
 
-mkdir -p $tempdir/build
-cd $tempdir/build
+cd /app/vendor/libmcrypt
 
 tar czf /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz .
 
