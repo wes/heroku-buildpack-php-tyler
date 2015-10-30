@@ -10,6 +10,9 @@ set -o pipefail
 
 orig_dir=$( pwd )
 
+rm -rf mkdir /app/local
+mkdir /app/local
+
 mkdir -p build && pushd build
 
 echo "+ Fetching libmcrypt libraries..."

@@ -12,8 +12,8 @@ fi
 basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 
 ## setup folder for build
-rm -rf mkdir /app/vendor/libmcrypt
-mkdir /app/vendor/libmcrypt
+rm -rf mkdir /app/local
+mkdir /app/local
 
 ## make a temp directory
 tempdir="$( mktemp -t libmcrypt_XXXX )"
@@ -26,13 +26,13 @@ curl -L "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_V
 
 cd libmcrypt-$LIBMCRYPT_VERSION
 
-./configure --prefix=/app/vendor/libmcrypt --disable-rpath && make install
+./configure --prefix=/app/local --disable-rpath && make install
 
-cd /app/vendor/libmcrypt/libmcrypt-$LIBMCRYPT_VERSION
+cd /app/local/libmcrypt-$LIBMCRYPT_VERSION
 
 tar czf /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz .
 
-rm -rf /app/vendor/libmcrypt
+rm -rf /app/local
 
 echo "+ Binaries available at /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
 echo "+ Upload this package to Amazon S3."
