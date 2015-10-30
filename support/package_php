@@ -69,8 +69,6 @@ echo "+ Configuring PHP..."
 --with-openssl \
 --with-pcre-regex \
 --with-pdo-mysql \
---with-pgsql \
---with-pdo-pgsql \
 --with-png-dir \
 --with-freetype-dir=/app/local \
 --with-zlib
