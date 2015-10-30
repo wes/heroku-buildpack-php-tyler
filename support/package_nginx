@@ -38,7 +38,7 @@ popd
 
 pushd $tempdir/nginx-$NGINX_VERSION
 
-./configure --prefix=$tempdir/build --with-pcre=$tempdir/contrib/pcre-8.21 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install
+./configure --prefix=$tempdir/build --with-pcre=$tempdir/contrib/pcre-8.21 --with-http_ssl_module --with-openssl=/usr --with-http_gzip_static_module --with-http_stub_status_module && make install
 
 pushd $tempdir/build
 
