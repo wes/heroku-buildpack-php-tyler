@@ -10,9 +10,6 @@ set -o pipefail
 
 orig_dir=$( pwd )
 
-rm -rf mkdir /app/local
-mkdir /app/local
-
 mkdir -p build && pushd build
 
 echo "+ Fetching libmcrypt libraries..."
@@ -31,7 +28,7 @@ curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYP
 # download openssl
 mkdir -p /app/local/openssl
 pushd /app/local/openssl
-wget http://www.openssl.org/source/openssl-1.0.1p.tar.gz
+wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
 gunzip openssl-1.0.1p.tar.gz
 tar -xvf openssl-1.0.1p.tar
 popd
@@ -65,12 +62,12 @@ echo "+ Configuring PHP..."
 --with-gd \
 --with-gettext \
 --with-jpeg-dir \
---with-mcrypt=/app/local \
+--with-mcrypt=/usr \
 --with-iconv \
 --with-mhash \
 --with-mysql \
 --with-mysqli \
---with-openssl \
+--with-openssl=/usr \
 --with-pcre-regex \
 --with-pdo-mysql \
 --with-pgsql \
