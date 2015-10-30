@@ -12,6 +12,10 @@ orig_dir=$( pwd )
 
 mkdir -p build && pushd build
 
+rm -rf /app/local
+mkdir -p /app
+mkdir -p /app/local
+
 echo "+ Fetching libmcrypt libraries..."
 # install mcrypt for portability.
 mkdir -p /app/local

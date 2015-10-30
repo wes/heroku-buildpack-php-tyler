@@ -23,8 +23,9 @@ curl -L "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_V
 # build and package libmcrypt for heroku
 #vulcan build -v -s libmcrypt-$LIBMCRYPT_VERSION -o $tempdir/libmcrypt-$LIBMCRYPT_VERSION.tar.gz -p /app/local -c './configure --prefix=/app/local --disable-rpath && make install'
 
-#rm -rf /app/local
-
+rm -rf /app/local
+mkdir -p /app
+mkdir -p /app/local
 
 cd libmcrypt-${LIBMCRYPT_VERSION}
 ./configure --prefix=/app/local --disable-rpath && make install

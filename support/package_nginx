@@ -17,6 +17,11 @@ rm -rf $tempdir
 mkdir -p $tempdir
 pushd $tempdir
 
+rm -rf /app/local
+mkdir -p /app
+mkdir -p /app/local
+
+
 # download and extract nginx
 curl -L http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o - | tar xz
 

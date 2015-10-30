@@ -18,6 +18,10 @@ rm -rf $tempdir
 mkdir -p $tempdir
 pushd $tempdir
 
+rm -rf /app/local
+mkdir -p /app
+mkdir -p /app/local
+
 # download and extract
 curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" -o - | tar xz
 pushd newrelic-php5-${NEWRELIC_VERSION}-linux

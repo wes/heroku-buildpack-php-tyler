@@ -24,6 +24,8 @@ curl -L "https://launchpad.net/libmemcached/1.0/${LIBMEMCACHED_VERSION}/+downloa
 #vulcan build -v -s libmemcached-$LIBMEMCACHED_VERSION -o $tempdir/libmemcached-$LIBMEMCACHED_VERSION.tar.gz -p /app/local -c './configure --prefix=/app/local && make install'
 
 rm -rf /app/local
+mkdir -p /app
+mkdir -p /app/local
 
 mkdir $tempdir/build
 
