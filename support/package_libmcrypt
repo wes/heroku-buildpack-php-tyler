@@ -11,7 +11,11 @@ fi
 
 basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 
-# make a temp directory
+## setup folder for build
+rm -rf mkdir /app/vendor/libmcrypt
+mkdir /app/vendor/libmcrypt
+
+## make a temp directory
 tempdir="$( mktemp -t libmcrypt_XXXX )"
 rm -rf $tempdir
 mkdir -p $tempdir
@@ -19,8 +23,6 @@ cd $tempdir
 
 # download and extract libmcrypt
 curl -L "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.bz2?r=&ts=1337060759&use_mirror=nchc" -o - | tar xj
-
-mkdir -p /app/vendor/libmcrypt
 
 ./configure --prefix=/app/vendor/libmcrypt --disable-rpath && make install
 
