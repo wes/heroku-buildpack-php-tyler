@@ -62,7 +62,7 @@ echo "+ Configuring PHP..."
 --with-gd \
 --with-gettext \
 --with-jpeg-dir \
---with-mcrypt \
+--with-mcrypt=/app/local \
 --with-iconv \
 --with-mhash \
 --with-mysql \
