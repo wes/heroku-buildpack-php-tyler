@@ -31,12 +31,12 @@ chmod +x $installdir/bin/newrelic-license
 popd
 
 pushd $installdir
-tar czf $tempdir/newrelic-${NEWRELIC_VERSION}-heroku.tar.gz .
+tar czf /vagrant/_compiled/newrelic-${NEWRELIC_VERSION}-heroku.tar.gz .
 popd
 
 popd
 
-cp $tempdir/newrelic-${NEWRELIC_VERSION}-heroku.tar.gz .
+#cp $tempdir/newrelic-${NEWRELIC_VERSION}-heroku.tar.gz .
 
 echo "+ Binaries available at ./newrelic-${NEWRELIC_VERSION}-heroku.tar.gz."
 echo "+ Upload this package to Amazon S3."

@@ -1,7 +1,9 @@
 #!/bin/bash
 # vulcan build -v -c "./vulcan-build-php.sh" -p /app/vendor/php -o php-${PHP_VERSION}-with-fpm-heroku.tar.gz
 
+## EDIT
 source ./set-env.sh
+## END EDIT
 
 set -e
 set -o pipefail
@@ -25,7 +27,7 @@ curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYP
 
 echo "+ Fetching PHP sources..."
 #fetch php, extract
-curl -L http://us.php.net/get/php-$PHP_VERSION.tar.bz2/from/www.php.net/mirror -o - | tar xj
+curl -L http://php.net/distributions/php-$PHP_VERSION.tar.bz2 -o - | tar xj
 
 pushd php-$PHP_VERSION
 
@@ -134,6 +136,10 @@ popd
 echo "+ Packaging PHP..."
 # package PHP
 echo ${PHP_VERSION} > /app/vendor/php/VERSION
+
+pushd /app/vendor/php
+
+tar czf /vagrant/_compiled/php-${PHP_VERSION}-with-fpm-heroku.tar.gz .
 
 popd
 
