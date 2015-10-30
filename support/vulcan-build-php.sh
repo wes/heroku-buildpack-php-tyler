@@ -28,7 +28,7 @@ curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYP
 # download openssl
 mkdir -p /app/local/openssl
 pushd /app/local/openssl
-wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
+wget http://www.openssl.org/source/openssl-1.0.1p.tar.gz
 gunzip openssl-1.0.1p.tar.gz
 tar -xvf openssl-1.0.1p.tar
 popd
