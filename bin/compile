@@ -183,9 +183,6 @@ tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
 
 popd > /dev/null
 
-# setup sym link for annoying 62 dependencies
-ln -s ${BUILD_DIR}/local/lib/libjpeg.so.8 ${BUILD_DIR}/local/lib/libjpeg.so.62
-
 # Composer Installation
 pushd ${BUILD_DIR} > /dev/null
 if [ -f "composer.json" ]
@@ -264,9 +261,9 @@ if [ -d /app/conf/nginx.d ]; then
 fi
 
 # Set NEWRELIC key
-if [ -x "/app/local/bin/newrelic-license" ]; then
-	/app/local/bin/newrelic-license
-fi
+#if [ -x "/app/local/bin/newrelic-license" ]; then
+#	/app/local/bin/newrelic-license
+#fi
 
 # Preserve current php-fpm.conf so that env list does
 # not go out of hand across restarts.
