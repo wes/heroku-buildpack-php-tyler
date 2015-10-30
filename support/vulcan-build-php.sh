@@ -26,12 +26,12 @@ mkdir -p /app/vendor/freetype
 curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/freetype
 
 # download openssl
-mkdir -p /app/vendor/openssl
-pushd /app/vendor/openssl
-wget http://www.openssl.org/source/openssl-1.0.1p.tar.gz
-gunzip openssl-1.0.1p.tar.gz
-tar -xvf openssl-1.0.1p.tar
-popd
+#mkdir -p /app/vendor/openssl
+#pushd /app/vendor/openssl
+#wget http://www.openssl.org/source/openssl-1.0.1p.tar.gz
+#gunzip openssl-1.0.1p.tar.gz
+#tar -xvf openssl-1.0.1p.tar
+#popd
 
 echo "+ Fetching PHP sources..."
 #fetch php, extract
@@ -67,7 +67,7 @@ echo "+ Configuring PHP..."
 --with-mhash \
 --with-mysql \
 --with-mysqli \
---with-openssl=/app/vendor/openssl/openssl-1.0.1p \
+--with-openssl=/usr/bin \
 --with-pcre-regex \
 --with-pdo-mysql \
 --with-pgsql \
