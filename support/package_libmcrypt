@@ -28,7 +28,7 @@ cd libmcrypt-$LIBMCRYPT_VERSION
 
 ./configure --prefix=/app/local --disable-rpath && make install
 
-cd /app/local/libmcrypt-$LIBMCRYPT_VERSION
+cd /app/local/
 
 tar czf /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz .
 
