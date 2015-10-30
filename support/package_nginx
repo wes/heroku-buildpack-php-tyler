@@ -35,7 +35,7 @@ tar -xvf pcre-8.21.tar
 rm pcre-8.21.tar
 popd
 
-# download and extract zlib into contrib directory
+# download and extract zlib into directory
 mkdir -p $tempdir/zlib
 pushd $tempdir/zlib
 wget http://s3.amazonaws.com/s3.hmt.fm/cedar14/zlib-1.2.8.tar.gz
@@ -43,6 +43,16 @@ gunzip zlib-1.2.8.tar.gz
 tar -xvf zlib-1.2.8.tar
 rm zlib-1.2.8.tar
 popd
+
+# download and extract openssl into directory
+mkdir -p $tempdir/openssl
+pushd $tempdir/openssl
+wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
+gunzip openssl-1.0.1p.tar.gz
+tar -xvf openssl-1.0.1p.tar
+rm openssl-1.0.1p.tar
+popd
+
 
 pushd $tempdir/nginx-$NGINX_VERSION
 
