@@ -183,6 +183,9 @@ tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
 
 popd > /dev/null
 
+# setup sym link for annoying 62 dependencies
+ln -s /app/local/libjpeg.so.62 /app/local/libjpeg.so.8
+
 # Composer Installation
 pushd ${BUILD_DIR} > /dev/null
 if [ -f "composer.json" ]
