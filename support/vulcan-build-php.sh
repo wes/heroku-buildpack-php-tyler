@@ -67,14 +67,14 @@ echo "+ Configuring PHP..."
 --with-mhash \
 --with-mysql \
 --with-mysqli \
---with-openssl=/app/local/openssl/openssl-1.0.1p \
+--with-openssl=/usr \
 --with-pcre-regex \
 --with-pdo-mysql \
 --with-pgsql \
 --with-pdo-pgsql \
 --with-png-dir \
 --with-freetype-dir=/app/local \
---with-libdir=lib/x86_64-linux-gnu \
+--with-libdir=/lib/x86_64-linux-gnu \
 --with-zlib
 
 echo "+ Compiling PHP..."
