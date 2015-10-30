@@ -19,7 +19,7 @@ mkdir /app/vendor/libmcrypt
 tempdir="$( mktemp -t libmcrypt_XXXX )"
 rm -rf $tempdir
 mkdir -p $tempdir
-cd $tempdir
+cd $tempdir/libmcrypt-${LIBMCRYPT_VERSION}
 
 # download and extract libmcrypt
 curl -L "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.bz2?r=&ts=1337060759&use_mirror=nchc" -o - | tar xj
