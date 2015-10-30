@@ -31,6 +31,7 @@ cd /app/vendor/libmcrypt
 
 ./configure --prefix=/app/vendor/libmcrypt --disable-rpath && make install
 
+mkdir -p $tempdir/build
 cd $tempdir/build
 
 tar czf /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz .
