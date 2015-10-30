@@ -15,15 +15,11 @@ basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 tempdir="$( mktemp -t libmcrypt_XXXX )"
 rm -rf $tempdir
 mkdir -p $tempdir
-pushd $tempdir
+cd $tempdir
 
 # download and extract libmcrypt
 curl -L "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.bz2?r=&ts=1337060759&use_mirror=nchc" -o - | tar xj
 
-# build and package libmcrypt for heroku
-#vulcan build -v -s libmcrypt-$LIBMCRYPT_VERSION -o $tempdir/libmcrypt-$LIBMCRYPT_VERSION.tar.gz -p /app/local -c './configure --prefix=/app/local --disable-rpath && make install'
-
-rm -rf /app/vendor/libmcrypt
 mkdir -p /app/vendor/libmcrypt
 
 ./configure --prefix=/app/vendor/libmcrypt --disable-rpath && make install
@@ -32,7 +28,7 @@ cd /app/vendor/libmcrypt
 
 tar czf /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz .
 
-popd
+rm -rf /app/vendor/libmcrypt
 
 echo "+ Binaries available at /vagrant/_compiled/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
 echo "+ Upload this package to Amazon S3."
