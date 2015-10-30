@@ -67,7 +67,7 @@ echo "+ Configuring PHP..."
 --with-mhash \
 --with-mysql \
 --with-mysqli \
---with-openssl=/usr/bin/openssl \
+--with-openssl=/usr \
 --with-pcre-regex \
 --with-pdo-mysql \
 --with-pgsql \
