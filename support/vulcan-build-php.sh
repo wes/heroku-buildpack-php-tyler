@@ -14,24 +14,16 @@ mkdir -p build && pushd build
 
 echo "+ Fetching libmcrypt libraries..."
 # install mcrypt for portability.
-mkdir -p /app/vendor/libmcrypt
-curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/libmcrypt
+mkdir -p /app/local
+curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" -o - | tar xz -C /app/local
 
 echo "+ Fetching libmemcached libraries..."
-mkdir -p /app/vendor/libmemcached
-curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmemcached-${LIBMEMCACHED_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/libmemcached
+mkdir -p /app/local
+curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmemcached-${LIBMEMCACHED_VERSION}.tar.gz" -o - | tar xz -C /app/local
 
 echo "+ Fetching freetype libraries..."
-mkdir -p /app/vendor/freetype
-curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/freetype
-
-# download openssl
-#mkdir -p /app/vendor/openssl
-#pushd /app/vendor/openssl
-#wget http://www.openssl.org/source/openssl-1.0.1p.tar.gz
-#gunzip openssl-1.0.1p.tar.gz
-#tar -xvf openssl-1.0.1p.tar
-#popd
+mkdir -p /app/local
+curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/local
 
 echo "+ Fetching PHP sources..."
 #fetch php, extract
@@ -62,19 +54,18 @@ echo "+ Configuring PHP..."
 --with-gd \
 --with-gettext \
 --with-jpeg-dir \
---with-mcrypt=/app/vendor/libmcrypt \
+--with-mcrypt=/app/local \
 --with-iconv \
 --with-mhash \
 --with-mysql \
 --with-mysqli \
---with-openssl=/usr \
+--with-openssl \
 --with-pcre-regex \
 --with-pdo-mysql \
 --with-pgsql \
 --with-pdo-pgsql \
 --with-png-dir \
---with-freetype-dir=/app/vendor/freetype \
---with-libdir=lib/x86_64-linux-gnu \
+--with-freetype-dir=/app/local \
 --with-zlib
 
 echo "+ Compiling PHP..."
@@ -120,7 +111,7 @@ pushd memcached-${MEMCACHED_VERSION}
 sed -i -e '21 s/no, no/yes, yes/' ./config.m4
 sed -i -e '18 s/no, no/yes, yes/' ./config.m4
 phpize
-./configure --with-libmemcached-dir=/app/vendor/memcached --with-php-config=/app/vendor/php/bin/php-config
+./configure --with-libmemcached-dir=/app/local --with-php-config=/app/vendor/php/bin/php-config
 make && make install
 popd
 
