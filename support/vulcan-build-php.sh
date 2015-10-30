@@ -14,8 +14,8 @@ mkdir -p build && pushd build
 
 echo "+ Fetching libmcrypt libraries..."
 # install mcrypt for portability.
-mkdir -p /app/local
-curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" -o - | tar xz -C /app/local
+mkdir -p /app/vendor/libmcrypt
+curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/libmcrypt
 
 echo "+ Fetching libmemcached libraries..."
 mkdir -p /app/local
@@ -62,7 +62,7 @@ echo "+ Configuring PHP..."
 --with-gd \
 --with-gettext \
 --with-jpeg-dir \
---with-mcrypt \
+--with-mcrypt=/app/vendor/libmcrypt \
 --with-iconv \
 --with-mhash \
 --with-mysql \
