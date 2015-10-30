@@ -30,16 +30,18 @@ curl -L http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o - | tar xz
 mkdir -p $tempdir/contrib
 pushd $tempdir/contrib
 wget http://downloads.sourceforge.net/project/pcre/pcre/8.21/pcre-8.21.tar.gz
-tar xz pcre-8.21.tar.gz
-rm pcre-8.21.tar.gz
+gunzip pcre-8.21.tar.gz
+tar -xvf pcre-8.21.tar
+rm pcre-8.21.tar
 popd
 
 # download and extract zlib into contrib directory
 mkdir -p $tempdir/zlib
 pushd $tempdir/zlib
 wget http://s3.amazonaws.com/s3.hmt.fm/cedar14/zlib-1.2.8.tar.gz
-tar xz zlib-1.2.8.tar.gz
-rm zlib-1.2.8.tar.gz
+gunzip zlib-1.2.8.tar.gz
+tar -xvf zlib-1.2.8.tar
+rm zlib-1.2.8.tar
 popd
 
 pushd $tempdir/nginx-$NGINX_VERSION
