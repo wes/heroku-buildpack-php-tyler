@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./set-env.sh
+
 set -e
 
 if [ "$LIBMEMCACHED_VERSION" == "" ]; then
@@ -19,7 +21,7 @@ pushd $tempdir
 curl -L "https://launchpad.net/libmemcached/1.0/${LIBMEMCACHED_VERSION}/+download/libmemcached-${LIBMEMCACHED_VERSION}.tar.gz" -o - | tar xz
 
 # build and package libmcrypt for heroku
-vulcan build -v -s libmemcached-$LIBMEMCACHED_VERSION -o $tempdir/libmemcached-$LIBMEMCACHED_VERSION.tar.gz -p /app/local -c './configure --prefix=/app/local && make install' 
+vulcan build -v -s libmemcached-$LIBMEMCACHED_VERSION -o $tempdir/libmemcached-$LIBMEMCACHED_VERSION.tar.gz -p /app/local -c './configure --prefix=/app/local && make install'
 
 popd
 
