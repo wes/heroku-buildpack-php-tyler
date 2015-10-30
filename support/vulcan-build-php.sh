@@ -14,20 +14,20 @@ mkdir -p build && pushd build
 
 echo "+ Fetching libmcrypt libraries..."
 # install mcrypt for portability.
-mkdir -p /app/local
-curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" -o - | tar xz -C /app/local
+mkdir -p /app/vendor/libmcrypt
+curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/libmcrypt
 
 echo "+ Fetching libmemcached libraries..."
-mkdir -p /app/local
-curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmemcached-${LIBMEMCACHED_VERSION}.tar.gz" -o - | tar xz -C /app/local
+mkdir -p /app/vendor/libmemcached
+curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libmemcached-${LIBMEMCACHED_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/libmemcached
 
 echo "+ Fetching freetype libraries..."
-mkdir -p /app/local
-curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/local
+mkdir -p /app/vendor/freetype
+curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/vendor/freetype
 
 # download openssl
-mkdir -p /app/local/openssl
-pushd /app/local/openssl
+mkdir -p /app/vendor/openssl
+pushd /app/vendor/openssl
 wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
 gunzip openssl-1.0.1p.tar.gz
 tar -xvf openssl-1.0.1p.tar
@@ -62,7 +62,7 @@ echo "+ Configuring PHP..."
 --with-gd \
 --with-gettext \
 --with-jpeg-dir \
---with-mcrypt=/app/local \
+--with-mcrypt=/app/vendor/libmcrypt \
 --with-iconv \
 --with-mhash \
 --with-mysql \
@@ -73,7 +73,7 @@ echo "+ Configuring PHP..."
 --with-pgsql \
 --with-pdo-pgsql \
 --with-png-dir \
---with-freetype-dir=/app/local \
+--with-freetype-dir=/app/vendor/freetype \
 --with-libdir=lib/x86_64-linux-gnu \
 --with-zlib
 
@@ -120,7 +120,7 @@ pushd memcached-${MEMCACHED_VERSION}
 sed -i -e '21 s/no, no/yes, yes/' ./config.m4
 sed -i -e '18 s/no, no/yes, yes/' ./config.m4
 phpize
-./configure --with-libmemcached-dir=/app/local --with-php-config=/app/vendor/php/bin/php-config
+./configure --with-libmemcached-dir=/app/vendor/memcached --with-php-config=/app/vendor/php/bin/php-config
 make && make install
 popd
 

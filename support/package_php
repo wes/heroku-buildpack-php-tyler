@@ -14,4 +14,3 @@ vulcan build -v -o php-${PHP_VERSION}-with-fpm-heroku.tar.gz -p /app/vendor/php 
 
 echo "+ Binaries available at ./php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
 echo "+ Upload this package to Amazon S3."
-
