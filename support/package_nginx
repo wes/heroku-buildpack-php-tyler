@@ -56,9 +56,11 @@ popd
 
 pushd $tempdir/nginx-$NGINX_VERSION
 
-./configure --prefix=$tempdir/build --with-pcre=$tempdir/contrib/pcre-8.21 --with-openssl=$tempdir/openssl/openssl-1.0.1p --with-zlib=$tempdir/zlib/zlib-1.2.8 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install
+mkdir -p /app/vendor/nginx
 
-pushd $tempdir/build
+./configure --prefix=/app/vendor/nginx --with-pcre=$tempdir/contrib/pcre-8.21 --with-openssl=$tempdir/openssl/openssl-1.0.1p --with-zlib=$tempdir/zlib/zlib-1.2.8 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install
+
+pushd /app/vendor/nginx
 
 tar czf /vagrant/_compiled/nginx-$NGINX_VERSION.tar.gz .
 
