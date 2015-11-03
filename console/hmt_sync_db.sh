@@ -1,8 +1,13 @@
+
+
 echo 'Dropping Local Database'
 mysqladmin -u root -proot drop holdmyticket
 
+echo 'Restarting MySQL'
+/etc/init.d/mysql restart
+
 echo 'Creating tmp folder in vagrant folder to save space.'
-mkdir /vagrant/.tmp/
+mkdir -p /vagrant/.tmp/
 
 echo -n "Do you want to do a full sync, or partial (much faster) sync? Partial is default (full/partial)? "
 read size
@@ -31,8 +36,14 @@ gunzip /vagrant/.tmp/holdmyticket.sql.gz
 echo 'Creating Local Database'
 mysqladmin -u root -proot create holdmyticket
 
+echo 'Restarting MySQL'
+/etc/init.d/mysql restart
+
 echo 'Importing Database'
 mysql -u root -proot holdmyticket < /vagrant/.tmp/holdmyticket.sql
+
+echo 'Restarting MySQL'
+/etc/init.d/mysql restart
 
 echo 'Cleaning up'
 rm -rf /vagrant/.tmp/
