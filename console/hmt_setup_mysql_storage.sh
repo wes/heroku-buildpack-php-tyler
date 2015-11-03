@@ -1,7 +1,7 @@
-/etc/init.d/mysql.server stop
-mv /usr/local/mysql/data/* /db/
-rm -rf /usr/local/mysql/data
-ln -s /db /usr/local/mysql/data
+/etc/init.d/mysql stop
+mv /var/lib/mysql/* /db/
+rm -rf /var/lib/mysql/data
+ln -s /db /var/lib/mysql/data
 chown -R mysql.mysql /db
 chmod -R g+w /db
 /etc/init.d/mysql.server start

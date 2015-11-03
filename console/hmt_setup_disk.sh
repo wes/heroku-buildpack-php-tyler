@@ -1,4 +1,4 @@
-/etc/init.d/mysql.server stop
+/etc/init.d/mysql stop
 fdisk /dev/sdb
 mkfs.ext4 /dev/sdb1
 mkdir /db
