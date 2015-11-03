@@ -1,9 +1,6 @@
 #!/bin/bash
 # Usage: bin/compile <build-dir> <cache-dir>
 
-echo "-----> Installing Cedar 14 Dependencies"
-./cedar/cedar-14.sh
-
 echo "-----> Installing Ruby"
 apt-get -y install ruby
 
@@ -302,8 +299,10 @@ apt-get -y install libaio1
 #/etc/init.d/mysql.server start
 #update-rc.d mysql.server defaults
 #ln -s /usr/local/mysql/bin/* /usr/local/bin/
+
 apt-get -y install mysql-server-5.6
-/etc/init.d/mysql start
+/etc/init.d/mysql restart
+
 mysql_secure_installation
 
 echo "-----> Now Finished MySQL Install"
