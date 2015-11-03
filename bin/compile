@@ -320,19 +320,7 @@ apt-get -y install redis-server
 echo "-----> Installing MySQL"
 
 apt-get -y install mysql-server-5.6
-/etc/init.d/mysql restart
 
-mysql_secure_installation
+echo "-----> Done Installing MySQL"
 
-echo "-----> Setting up MySQL Permissions"
-
-echo "update user SET Host = '10.0.0.1' WHERE Host = '127.0.0.1';" > /tmp/mysqlimport
-mysql -u root -proot -h localhost mysql < /tmp/mysqlimport
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
-rm /tmp/mysqlimport
-
-echo "-----> Finished Compiling"
-
-echo "\n\n"
-
-echo "You should stop your vagrant machine and create the new drive per instructions for the database.\n\n"
+echo "Now you will want to setup MySQL, run this script /root/heroku-buildpack-php-tyler/bin/mysql_init"
