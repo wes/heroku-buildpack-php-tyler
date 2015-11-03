@@ -1,7 +1,13 @@
 #!/bin/bash
 # Usage: bin/compile <build-dir> <cache-dir>
 
+echo "-----> Installing Cedar 14 Dependencies"
+./cedar/cedar-14.sh
+
+echo "-----> Installing Ruby"
 apt-get -y install ruby
+
+echo "-----> Installing Emacs"
 apt-get -y install emacs
 
 set -e
