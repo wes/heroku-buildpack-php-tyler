@@ -279,7 +279,7 @@ update-rc.d -f apparmor remove
 apt-get remove apparmor apparmor-utils
 groupadd mysql
 useradd -r -g mysql mysql
-apt-get install libaio1
+apt-get -y install libaio1
 wget -O mysql-5.6.8-rc-linux2.6-x86_64.tar.gz http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.8-rc-linux2.6-x86_64.tar.gz/from/http://cdn.mysql.com/
 tar xvfz mysql-5.6.8-rc-linux2.6-x86_64.tar.gz
 mv mysql-5.6.8-rc-linux2.6-x86_64 mysql
