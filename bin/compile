@@ -272,33 +272,6 @@ chmod 777 /tmp/php-fpm.socket
 EOF
 chmod +x boot.sh
 
-echo "-----> Installing MySQL"
-
-/etc/init.d/apparmor stop
-update-rc.d -f apparmor remove
-apt-get remove apparmor apparmor-utils
-groupadd mysql
-useradd -r -g mysql mysql
-apt-get -y install libaio1
-wget -O mysql-5.6.8-rc-linux2.6-x86_64.tar.gz http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.8-rc-linux2.6-x86_64.tar.gz/from/http://cdn.mysql.com/
-tar xvfz mysql-5.6.8-rc-linux2.6-x86_64.tar.gz
-mv mysql-5.6.8-rc-linux2.6-x86_64 mysql
-cd mysql
-chown -R mysql .
-chgrp -R mysql .
-scripts/mysql_install_db --user=mysql
-chown -R root .
-chown -R mysql data
-cp support-files/mysql.server /etc/init.d/mysql.server
-/etc/init.d/mysql.server start
-update-rc.d mysql.server defaults
-ln -s /usr/local/mysql/bin/* /usr/local/bin/
-mysql_secure_installation
-echo "update user SET Host = '10.0.0.1' WHERE Host = '127.0.0.1';" > /tmp/mysqlimport
-mysql -u root -proot -h localhost mysql < /tmp/mysqlimport
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
-rm /tmp/mysqlimport
-
 echo "-----> Setting up Symlinks"
 
 ln -s /vagrant/global /app/global
@@ -315,5 +288,34 @@ chmod -R g+r /app/vendor/php/lib/php
 echo "-----> Installing Local Redis Server"
 
 apt-get -y install redis-server
+
+echo "-----> Installing MySQL"
+
+/etc/init.d/apparmor stop
+update-rc.d -f apparmor remove
+apt-get remove apparmor apparmor-utils
+groupadd mysql
+useradd -r -g mysql mysql
+apt-get -y install libaio1
+cd /usr/local
+wget -O mysql-5.6.8-rc-linux2.6-x86_64.tar.gz http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.8-rc-linux2.6-x86_64.tar.gz/from/http://cdn.mysql.com/
+tar xvfz mysql-5.6.8-rc-linux2.6-x86_64.tar.gz
+mv mysql-5.6.8-rc-linux2.6-x86_64 mysql
+cd mysql
+chown -R mysql .
+chgrp -R mysql .
+/usr/local/mysql/scripts/mysql_install_db --user=mysql
+chown -R root .
+chown -R mysql data
+cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql.server
+/etc/init.d/mysql.server start
+update-rc.d mysql.server defaults
+ln -s /usr/local/mysql/bin/* /usr/local/bin/
+/usr/local/mysql/bin/mysql_secure_installation
+
+echo "update user SET Host = '10.0.0.1' WHERE Host = '127.0.0.1';" > /tmp/mysqlimport
+mysql -u root -proot -h localhost mysql < /tmp/mysqlimport
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
+rm /tmp/mysqlimport
 
 echo "-----> Now you will want to setup MySQL, run this script /root/heroku-buildpack-php-tyler/bin/mysql_init"
