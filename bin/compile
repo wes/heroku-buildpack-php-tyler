@@ -293,7 +293,7 @@ echo "-----> Installing MySQL"
 
 /etc/init.d/apparmor stop
 update-rc.d -f apparmor remove
-apt-get remove apparmor apparmor-utils
+apt-get -y remove apparmor apparmor-utils
 groupadd mysql
 useradd -r -g mysql mysql
 apt-get -y install libaio1
