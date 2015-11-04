@@ -318,6 +318,9 @@ ln -s /usr/local/mysql/bin/* /usr/local/bin/
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
 #rm /tmp/mysqlimport
 
+## setup for curls
+echo "127.0.0.1    holdmyticket.loc" >> /etc/hosts
+
 echo "Setting up your ssh key"
 
 ssh-keygen -t rsa -b 4096 -C "dev@holdmyticket.loc"
