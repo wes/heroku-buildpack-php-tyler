@@ -313,9 +313,23 @@ update-rc.d mysql.server defaults
 ln -s /usr/local/mysql/bin/* /usr/local/bin/
 /usr/local/mysql/bin/mysql_secure_installation
 
-echo "update user SET Host = '10.0.0.1' WHERE Host = '127.0.0.1';" > /tmp/mysqlimport
-mysql -u root -proot -h localhost mysql < /tmp/mysqlimport
+#echo "update user SET Host = '10.0.0.1' WHERE Host = '127.0.0.1';" > /tmp/mysqlimport
+#mysql -u root -proot -h localhost mysql < /tmp/mysqlimport
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
-rm /tmp/mysqlimport
+#rm /tmp/mysqlimport
 
-echo "-----> Now you will want to setup MySQL, run this script /root/heroku-buildpack-php-tyler/bin/mysql_init"
+echo "Setting up your ssh key"
+
+ssh-keygen -t rsa -b 4096 -C "dev@holdmyticket.loc"
+
+echo "----------------------------"
+echo "SEND THIS KEY TO HMT SYS ADMIN"
+echo "----------------------------"
+
+cat /root/.ssh/id_rsa.pub
+
+echo "----------------------------"
+
+echo "ALL DONE NOW, YOU CAN BEGIN TO SYNC YOUR DATABASE"
+
+#echo "-----> Now you will want to setup MySQL, run this script /root/heroku-buildpack-php-tyler/bin/mysql_init"
