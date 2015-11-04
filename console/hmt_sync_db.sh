@@ -37,13 +37,13 @@ echo 'Creating Local Database'
 mysqladmin -u root -proot create holdmyticket
 
 echo 'Restarting MySQL'
-/etc/init.d/mysql restart
+/etc/init.d/mysql.server restart
 
 echo 'Importing Database'
 mysql -u root -proot holdmyticket < /vagrant/.tmp/holdmyticket.sql
 
 echo 'Restarting MySQL'
-/etc/init.d/mysql restart
+/etc/init.d/mysql.server restart
 
 echo 'Cleaning up'
 rm -rf /vagrant/.tmp/
