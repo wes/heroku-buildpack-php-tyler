@@ -329,7 +329,9 @@ echo "----------------------------"
 cat /root/.ssh/id_rsa.pub
 
 echo "----------------------------"
-
 echo "ALL DONE NOW, YOU CAN BEGIN TO SYNC YOUR DATABASE"
+echo "----------------------------"
+echo "RUN THIS TO BEGIN SYNC: /root/heroku-buildpack-php-tyler/console/hmt_sync_db.sh"
+echo "----------------------------"
 
 #echo "-----> Now you will want to setup MySQL, run this script /root/heroku-buildpack-php-tyler/bin/mysql_init"
