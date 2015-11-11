@@ -11,6 +11,12 @@ fi
 
 basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 
+if [ -z "$NGINX_ZLIB_VERSION" ]; then
+    NGINX_ZLIB_VERSION=1.2.8
+fi
+
+zlib_version="$NGINX_ZLIB_VERSION"
+
 # make a temp directory
 tempdir="$( mktemp -t nginx_XXXX )"
 rm -rf $tempdir
@@ -26,22 +32,39 @@ pushd $tempdir/contrib
 wget http://downloads.sourceforge.net/project/pcre/pcre/8.21/pcre-8.21.tar.gz
 gunzip pcre-8.21.tar.gz
 tar -xvf pcre-8.21.tar
+rm pcre-8.21.tar
 popd
 
-# build and package nginx for heroku
-#vulcan build -v -s nginx-$NGINX_VERSION -o $tempdir/nginx-$NGINX_VERSION-heroku.tar.gz -p /app/vendor/nginx -c './configure --prefix=/app/vendor/nginx --with-pcre=contrib/pcre-8.21 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install'
+# download and extract zlib into directory
+mkdir -p $tempdir/zlib
+pushd $tempdir/zlib
+wget http://s3.amazonaws.com/s3.hmt.fm/cedar14/zlib-1.2.8.tar.gz
+gunzip zlib-1.2.8.tar.gz
+tar -xvf zlib-1.2.8.tar
+rm zlib-1.2.8.tar
+popd
+
+# download and extract openssl into directory
+mkdir -p $tempdir/openssl
+pushd $tempdir/openssl
+wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
+gunzip openssl-1.0.1p.tar.gz
+tar -xvf openssl-1.0.1p.tar
+rm openssl-1.0.1p.tar
+popd
+
 
 pushd $tempdir/nginx-$NGINX_VERSION
 
-./configure --prefix=$tempdir/build --with-pcre=$tempdir/contrib/pcre-8.21 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install
+mkdir -p /app/vendor/nginx
 
-pushd $tempdir/build
+./configure --prefix=/app/vendor/nginx --with-pcre=$tempdir/contrib/pcre-8.21 --with-openssl=$tempdir/openssl/openssl-1.0.1p --with-zlib=$tempdir/zlib/zlib-1.2.8 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install
+
+pushd /app/vendor/nginx
 
 tar czf /vagrant/_compiled/nginx-$NGINX_VERSION.tar.gz .
 
 popd
-
-#cp $tempdir/nginx-$NGINX_VERSION-heroku.tar.gz .
 
 echo "+ Binaries available at ./nginx-$NGINX_VERSION-heroku.tar.gz"
 echo "+ Upload this package to Amazon S3."
