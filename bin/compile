@@ -316,6 +316,20 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql > /dev/null
 sed -i 's/NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES/NO_ENGINE_SUBSTITUTION/g' /usr/local/mysql/my.cnf
 /etc/init.d/mysql.server restart
 
+## installing grunt
+
+echo "INSTALLING GRUNT"
+
+sudo apt-get -y install nodejs
+sudo apt-get -y install npm
+ln -s /usr/bin/nodejs /usr/bin/node
+npm install -g grunt-cli
+cd /vagrant/apps/front
+npm install grunt-contrib-watch
+npm install grunt-contrib-clean
+npm install grunt-contrib-uglify
+npm install grunt-riot
+
 ## setup for curls
 echo "127.0.0.1    holdmyticket.loc" >> /etc/hosts
 
