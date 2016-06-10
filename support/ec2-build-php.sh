@@ -94,6 +94,7 @@ echo "+ Configuring PHP..."
 --enable-pcntl \
 --enable-soap=shared \
 --enable-zip \
+--enable-bcmath \
 --with-bz2 \
 --with-curl \
 --with-gd \
