@@ -4,6 +4,9 @@
 echo "-----> Installing Ruby"
 apt-get -y install ruby
 
+echo "-----> Installing PV"
+apt-get -y install pv
+
 echo "-----> Installing Emacs"
 apt-get -y install emacs
 

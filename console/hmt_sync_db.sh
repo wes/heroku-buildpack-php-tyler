@@ -40,7 +40,7 @@ echo 'Restarting MySQL'
 /etc/init.d/mysql.server restart
 
 echo 'Importing Database'
-mysql -u root -proot holdmyticket < /vagrant/.tmp/holdmyticket.sql
+pv /vagrant/.tmp/holdmyticket.sql | mysql -u root -proot holdmyticket
 
 echo 'Restarting MySQL'
 /etc/init.d/mysql.server restart
