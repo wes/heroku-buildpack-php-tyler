@@ -1,11 +1,4 @@
 
-
-echo 'Dropping Local Database'
-mysqladmin -u root -proot drop holdmyticket
-
-echo 'Restarting MySQL'
-/etc/init.d/mysql restart
-
 echo 'Creating tmp folder in vagrant folder to save space.'
 mkdir -p /vagrant/.tmp/
 
@@ -29,6 +22,9 @@ else
     scp administrator@wesG5:/Users/administrator/Desktop/latest_small.sql.gz /vagrant/.tmp/holdmyticket.sql.gz
   fi
 fi
+
+echo 'Dropping Local Database'
+yes | mysqladmin -u root -proot drop holdmyticket
 
 echo 'Unzipping Archive'
 gunzip /vagrant/.tmp/holdmyticket.sql.gz
