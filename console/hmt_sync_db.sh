@@ -32,6 +32,11 @@ gunzip /vagrant/.tmp/holdmyticket.sql.gz
 echo 'Creating Local Database'
 mysqladmin -u root -proot create holdmyticket
 
+if ! mysql -u root -proot -e 'use holdmyticket_test';then
+  echo 'Creating Test Database'
+  mysqladmin -u root -proot create holdmyticket_test 
+fi
+
 echo 'Restarting MySQL'
 /etc/init.d/mysql.server restart
 
