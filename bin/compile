@@ -305,9 +305,10 @@ ln -s /app/vendor/php/bin/phpize /usr/bin/phpize
 ln -s /app/vendor/php/bin/php-config /usr/bin/php-config
 apt-get install php-pear
 apt-get install autoconf
-pecl install xdebug
+XDEBUG_INSTALL=`pecl install xdebug`
+ZEND_EXTENSION=`echo "${XDEBUG_INSTALL}" | grep -Po "(?<=Installing\s')([^']+)"`
 
-echo -e 'zend_extension = "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so"
+echo -e 'zend_extension = "'${ZEND_EXTENSION}'"
 xdebug.default_enable = 1
 xdebug.idekey = "vagrant"
 xdebug.remote_enable = 1
@@ -318,7 +319,8 @@ xdebug.remote_log = "/var/log/xdebug/xdebug.log"
 xdebug.remote_host = 10.0.2.2' >> /app/vendor/php/php.ini
 
 mkdir /var/log/xdebug
-touch /var/log/xdebug.log
+touch /var/log/xdebug/xdebug.log
+chmod 666 /var/log/xdebug/xdebug.log
 
 echo "-----> Installing Local Redis Server"
 
