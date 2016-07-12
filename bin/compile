@@ -362,6 +362,15 @@ apt-get -y install npm
 ln -s /usr/bin/nodejs /usr/bin/node
 npm install -g gulp
 
+echo "-----> Installing Heroku ToolBelt"
+
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+echo "-----> Adding aliases for deploying Heroku"
+
+echo -e "alias hmt_deploy_prod='cd /vagrant && gulp —-type=production_deploy && git push heroku master:master'
+alias hmt_deploy_dev='cd /vagrant && gulp --type=development_deploy && git push dev dev:master'" >> /root/.bashrc
+
 ## setup for curls
 echo "127.0.0.1    holdmyticket.loc" >> /etc/hosts
 
