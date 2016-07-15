@@ -286,6 +286,9 @@ for var in \`env | cut -f1 -d=\`; do
 	echo "env[\$var] = \\$\${var}" >> /app/vendor/php/etc/php-fpm.conf
 done
 
+mkdir /app/local/var
+mkdir /app/local/var/log
+mkdir /app/local/var/log/newrelic
 touch /app/vendor/nginx/logs/access.log
 touch /app/vendor/nginx/logs/error.log
 touch /app/vendor/php/var/log/php-fpm.log
