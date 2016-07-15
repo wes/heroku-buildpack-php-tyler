@@ -197,7 +197,7 @@ function install_newrelic() {
     cp -f "daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
     cp -f "agent/x64/newrelic-${php_api_version}.so" "${ext_dir}/newrelic.so"
     # cp -f "$basedir/../conf/php/newrelic.ini" "/app/vendor/php/etc/newrelic.ini"
-		cp -f $LP_DIR/conf/etc.d/04_newrelic.ini ${BUILD_DIR}/vendor/php/etc/newrelic.ini
+		#cp -f $LP_DIR/conf/etc.d/04_newrelic.ini ${BUILD_DIR}/vendor/php/etc/newrelic.ini
 		
 }
 
