@@ -184,8 +184,8 @@ echo "-----> Installing newrelic"
 
 function install_newrelic() {
 
-		local $(php_api_version)="20100525"
-    local ext_dir=/app/vendor/php/lib/php/extensions/no-debug-non-zts-$(php_api_version)
+		local php_api_version="20100525"
+    local ext_dir=/app/vendor/php/lib/php/extensions/no-debug-non-zts-${php_api_version}
     local tempdir=/tmp/newrelic-build
 		mkdir "$tempdir"
     cd "$tempdir"
@@ -195,7 +195,7 @@ function install_newrelic() {
     cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 
     cp -f "daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
-    cp -f "agent/x64/newrelic-$(php_api_version).so" "${ext_dir}/newrelic.so"
+    cp -f "agent/x64/newrelic-${php_api_version}.so" "${ext_dir}/newrelic.so"
     # cp -f "$basedir/../conf/php/newrelic.ini" "/app/vendor/php/etc/newrelic.ini"
 		cp -f $LP_DIR/conf/etc.d/04_newrelic.ini ${BUILD_DIR}/vendor/php/etc/newrelic.ini
 		
