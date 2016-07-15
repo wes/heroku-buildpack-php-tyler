@@ -183,13 +183,11 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
 echo "-----> Installing NewRelic"
 
-${NEWRELIC_BUILD_DIR}=/tmp/newrelic-build
+${NEWRELIC_BUILD_DIR}="/tmp/newrelic-build"
 mkdir "${NEWRELIC_BUILD_DIR}"
 cd "${NEWRELIC_BUILD_DIR}"
 curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
 mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
-cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
-
 
 echo "-----> Done Installing NewRelic"
 
@@ -226,8 +224,8 @@ cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
 cp -a $LP_DIR/conf/etc.d ${BUILD_DIR}/vendor/php/
 cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
-cp -f "daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
-cp -f "agent/x64/newrelic-20100525.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
+cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
 
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
