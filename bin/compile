@@ -184,8 +184,6 @@ echo "-----> Installing newrelic"
 
 function install_newrelic() {
 
-    local version="$1"
-    local cwd=$(pwd)
 		local $(php_api_version)="20100525"
     local ext_dir=/app/vendor/php/lib/php/extensions/no-debug-non-zts-$(php_api_version)
     local tempdir=/tmp/newrelic-build
@@ -205,7 +203,7 @@ function install_newrelic() {
 
 echo "-----> Installing NewRelic"
 
-install_newrelic()
+install_newrelic
 
 echo "-----> Done Installing NewRelic"
 
