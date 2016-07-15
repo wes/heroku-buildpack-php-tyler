@@ -161,32 +161,15 @@ tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
-# newrelic
-# echo "-----> Installing newrelic"
-# if [ -f "${NEWRELIC_FILE}" ]
-# then
-# 	if check_md5 "${NEWRELIC_FILE}"
-# 	then
-# 		echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-# 		echo ${NEWRELIC_URL} | indent
-# 		download_url ${NEWRELIC_URL}
-# 	else
-# 		echo "Using cached newrelic daemon v${NEWRELIC_VERSION}" | indent
-# 	fi
-# else
-# 	echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-# 	echo ${NEWRELIC_URL} | indent
-# 	download_url ${NEWRELIC_URL}
-# fi
-# 
-# tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
+popd > /dev/null
 
 echo "-----> Installing NewRelic"
 
 NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
 mkdir "${NEWRELIC_BUILD_DIR}"
 cd "${NEWRELIC_BUILD_DIR}"
-curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
+# curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
+curl --silent -L ${NEWRELIC_URL} | tar xz
 mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
 
 echo "-----> Done Installing NewRelic"
