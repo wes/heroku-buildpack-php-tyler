@@ -183,7 +183,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
 echo "-----> Installing NewRelic"
 
-${NEWRELIC_BUILD_DIR}="/tmp/newrelic-build"
+NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
 mkdir "${NEWRELIC_BUILD_DIR}"
 cd "${NEWRELIC_BUILD_DIR}"
 curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
