@@ -162,7 +162,7 @@ export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
 # newrelic
-echo "-----> Installing newrelic"
+# echo "-----> Installing newrelic"
 # if [ -f "${NEWRELIC_FILE}" ]
 # then
 # 	if check_md5 "${NEWRELIC_FILE}"
@@ -181,6 +181,8 @@ echo "-----> Installing newrelic"
 # 
 # tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
 
+echo "-----> Installing NewRelic"
+
 ${NEWRELIC_BUILD_DIR}=/tmp/newrelic-build
 mkdir "${NEWRELIC_BUILD_DIR}"
 cd "${NEWRELIC_BUILD_DIR}"
@@ -188,9 +190,6 @@ curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERS
 mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
 cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 
-echo "-----> Installing NewRelic"
-
-install_newrelic
 
 echo "-----> Done Installing NewRelic"
 
