@@ -17,7 +17,7 @@ NGINX_FILE="nginx-${NGINX_VERSION}.tar.gz"
 MCRYPT_FILE="libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
-NEWRELIC_FILE="newrelic-${NEWRELIC_VERSION}-heroku.tar.gz"
+NEWRELIC_FILE="newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz"
 PEARLIB_FILE="pearfiles.tar.gz"
 
 MANIFEST_URL="${S3_URL}/${MANIFEST_FILE}"
@@ -161,25 +161,16 @@ tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
-# newrelic
-echo "-----> Installing newrelic"
-if [ -f "${NEWRELIC_FILE}" ]
-then
-	if check_md5 "${NEWRELIC_FILE}"
-	then
-		echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-		echo ${NEWRELIC_URL} | indent
-		download_url ${NEWRELIC_URL}
-	else
-		echo "Using cached newrelic daemon v${NEWRELIC_VERSION}" | indent
-	fi
-else
-	echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-	echo ${NEWRELIC_URL} | indent
-	download_url ${NEWRELIC_URL}
-fi
+echo "-----> Installing NewRelic"
 
-tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
+NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
+mkdir "${NEWRELIC_BUILD_DIR}"
+cd "${NEWRELIC_BUILD_DIR}"
+# curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
+curl --silent -L ${NEWRELIC_URL} | tar xz
+mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
+
+echo "-----> Done Installing NewRelic"
 
 popd > /dev/null
 
@@ -214,6 +205,9 @@ cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
 cp -a $LP_DIR/conf/etc.d ${BUILD_DIR}/vendor/php/
 cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
+cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
+cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
 echo "-----> Installing boot script"
@@ -273,17 +267,25 @@ for var in \`env | cut -f1 -d=\`; do
 	echo "env[\$var] = \\$\${var}" >> /app/vendor/php/etc/php-fpm.conf
 done
 
+mkdir /app/local/var
+mkdir /app/local/var/log
+mkdir /app/local/var/log/newrelic
+mkdir /app/local/var/log/newrelic/run
+
+touch /var/vendor/newrelic/run/newrelic-daemon.pid
+
 touch /app/vendor/nginx/logs/access.log
 touch /app/vendor/nginx/logs/error.log
 touch /app/vendor/php/var/log/php-fpm.log
 touch /app/vendor/php/var/log/php-errors.log
 touch /app/local/var/log/newrelic/newrelic-daemon.log
 touch /app/local/var/log/newrelic/php_agent.log
+touch /app/vendor/newrelic/etc/newrelic.cfg
 
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
 
-/app/local/bin/newrelic-daemon -c /app/local/etc/newrelic.cfg -d error
+/app/vendor/newrelic/bin/newrelic-daemon -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
 /app/vendor/php/sbin/php-fpm
 /app/vendor/nginx/sbin/nginx
 EOF
