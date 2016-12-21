@@ -11,7 +11,7 @@ export LIBMEMCACHED_VERSION="1.0.7"
 export MEMCACHED_VERSION="2.0.1"
 export NEWRELIC_VERSION="4.9.0.54"
 export NEW_RELIC_LICENSE_KEY="3059beac230bc653378add929ca186d2b5ddfa5c"
-export NGINX_VERSION="1.4.4"
+export NGINX_VERSION="1.10.2"
 
 export EC2_PRIVATE_KEY=~/.ec2/pk.pem
 export EC2_CERT=~/.ec2/cert.pem
