@@ -14,11 +14,11 @@ set -e
 set -o pipefail
 
 # START CONFIG
-NGINX_VERSION=1.4.4
+NGINX_VERSION=1.12.2
 LIBMCRYPT_VERSION=2.5.8
-LIBMEMCACHED_VERSION=1.0.7
-PHP_VERSION=5.4.45
-S3_URL="https://s3.amazonaws.com/s3.hmt.fm/cedar14"
+LIBMEMCACHED_VERSION=1.0.18
+PHP_VERSION=7.2.0
+S3_URL="https://s3.amazonaws.com/s3.hmt.fm/php7-build"
 
 MANIFEST_FILE="manifest.md5sum"
 NGINX_FILE="nginx-${NGINX_VERSION}.tar.gz"
