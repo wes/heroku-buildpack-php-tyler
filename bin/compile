@@ -17,7 +17,7 @@ NGINX_FILE="nginx-${NGINX_VERSION}.tar.gz"
 MCRYPT_FILE="libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
-NEWRELIC_FILE="newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz"
+NEWRELIC_FILE="newrelic-${NEWRELIC_VERSION}-heroku.tar.gz"
 PEARLIB_FILE="pearfiles.tar.gz"
 
 MANIFEST_URL="${S3_URL}/${MANIFEST_FILE}"
