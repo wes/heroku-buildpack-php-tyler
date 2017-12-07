@@ -200,13 +200,21 @@ popd > /dev/null
 # Config files
 echo "-----> Copying config files"
 cp $LP_DIR/conf/php-fpm.conf ${BUILD_DIR}/vendor/php/etc/php-fpm.conf
+echo "-----> Copying config files 1"
 cp ${BUILD_DIR}/vendor/php/php/fpm/status.html ${BUILD_DIR}/status.html
+echo "-----> Copying config files 2"
 cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
+echo "-----> Copying config files 3"
 cp -a $LP_DIR/conf/etc.d ${BUILD_DIR}/vendor/php/
+echo "-----> Copying config files 4"
 cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
+echo "-----> Copying config files 5"
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
+echo "-----> Copying config files 6"
 cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
+echo "-----> Copying config files 7"
 cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+echo "-----> Copying config files 8"
 
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
