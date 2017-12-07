@@ -211,7 +211,7 @@ cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 echo "-----> Copying config files 5"
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 echo "-----> Copying config files 6"
-cp -f "${NEWRELIC_BUILD_DIR}/newrelic-${NEWRELIC_VERSION}-heroku/bin/newrelic-daemon" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
+cp -f "${NEWRELIC_BUILD_DIR}/bin/newrelic-daemon" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
 echo "-----> Copying config files 7"
 #cp -f "${NEWRELIC_BUILD_DIR}/newrelic-${NEWRELIC_VERSION}-heroku/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
 #echo "-----> Copying config files 8"
