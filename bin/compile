@@ -201,7 +201,7 @@ popd > /dev/null
 echo "-----> Copying config files"
 cp $LP_DIR/conf/php-fpm.conf ${BUILD_DIR}/vendor/php/etc/php-fpm.conf
 echo "-----> Copying config files 1"
-cp ${BUILD_DIR}/vendor/php/php/fpm/status.html ${BUILD_DIR}/status.html
+cp ${BUILD_DIR}/vendor/php/php/php/fpm/status.html ${BUILD_DIR}/status.html
 echo "-----> Copying config files 2"
 cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
 echo "-----> Copying config files 3"
