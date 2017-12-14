@@ -280,7 +280,7 @@ mkdir /app/local/var/log
 mkdir /app/local/var/log/newrelic
 mkdir /app/local/var/log/newrelic/run
 
-touch /var/vendor/newrelic/run/newrelic-daemon.pid
+touch /app/local/var/log/newrelic/run/newrelic-daemon.pid
 
 touch /app/vendor/nginx/logs/access.log
 touch /app/vendor/nginx/logs/error.log
