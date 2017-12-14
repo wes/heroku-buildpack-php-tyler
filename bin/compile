@@ -215,7 +215,7 @@ cp -f "${NEWRELIC_BUILD_DIR}/bin/newrelic-daemon" ${BUILD_DIR}/vendor/newrelic/b
 echo "-----> Copying config files 7"
 cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
 
-cp -f "${NEWRELIC_BUILD_DIR}/newrelic-${NEWRELIC_VERSION}-heroku/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+# cp -f "${NEWRELIC_BUILD_DIR}/newrelic-${NEWRELIC_VERSION}-heroku/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
 
 #echo "-----> Copying config files 8"
 
