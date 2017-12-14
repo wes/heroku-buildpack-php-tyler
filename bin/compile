@@ -272,10 +272,6 @@ mkdir /app/local/var/log
 mkdir /app/local/var/log/newrelic
 mkdir /app/local/var/log/newrelic/run
 
-mkdir /var/vendor
-mkdir /var/vendor/newrelic
-mkdir /var/vendor/newrelic/run
-
 touch /var/vendor/newrelic/run/newrelic-daemon.pid
 
 touch /app/vendor/nginx/logs/access.log
