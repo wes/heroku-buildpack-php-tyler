@@ -161,16 +161,15 @@ tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
-echo "-----> Installing NewRelic"
-
-NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
-mkdir "${NEWRELIC_BUILD_DIR}"
-cd "${NEWRELIC_BUILD_DIR}"
-# curl --silent -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
-curl --silent -L ${NEWRELIC_URL} | tar xz
-mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
-
-echo "-----> Done Installing NewRelic"
+# echo "-----> Installing NewRelic"
+# 
+# NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
+# mkdir "${NEWRELIC_BUILD_DIR}"
+# cd "${NEWRELIC_BUILD_DIR}"
+# curl --silent -L ${NEWRELIC_URL} | tar xz
+# mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
+# 
+# echo "-----> Done Installing NewRelic"
 
 popd > /dev/null
 
@@ -211,11 +210,11 @@ cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 echo "-----> Copying config files 5"
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 echo "-----> Copying config files 6"
-cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
-echo "-----> Copying config files 7"
 cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
-echo "-----> Copying config files 8"
-cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20170718/newrelic.so"
+# cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
+# echo "-----> Copying config files 7"
+# echo "-----> Copying config files 8"
+# cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20170718/newrelic.so"
 
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
@@ -281,20 +280,21 @@ mkdir /app/local/var/log
 mkdir /app/local/var/log/newrelic
 mkdir /app/local/var/log/newrelic/run
 
-touch /app/local/var/log/newrelic/run/newrelic-daemon.pid
+#touch /app/local/var/log/newrelic/run/newrelic-daemon.pid
 
 touch /app/vendor/nginx/logs/access.log
 touch /app/vendor/nginx/logs/error.log
 touch /app/vendor/php/var/log/php-fpm.log
 touch /app/vendor/php/var/log/php-errors.log
-touch /app/local/var/log/newrelic/newrelic-daemon.log
-touch /app/local/var/log/newrelic/php_agent.log
-touch /app/vendor/newrelic/etc/newrelic.cfg
+#touch /app/local/var/log/newrelic/newrelic-daemon.log
+#touch /app/local/var/log/newrelic/php_agent.log
+#touch /app/vendor/newrelic/etc/newrelic.cfg
 
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
 
-/app/vendor/newrelic/bin/newrelic-daemon --logfile /app/local/var/log/newrelic/newrelic-daemon.log -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
+#/app/vendor/newrelic/bin/newrelic-daemon --logfile /app/local/var/log/newrelic/newrelic-daemon.log -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
+
 /app/vendor/php/sbin/php-fpm
 /app/vendor/nginx/sbin/nginx
 EOF
