@@ -213,7 +213,10 @@ cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 echo "-----> Copying config files 6"
 cp -f "${NEWRELIC_BUILD_DIR}/bin/newrelic-daemon" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
 echo "-----> Copying config files 7"
-#cp -f "${NEWRELIC_BUILD_DIR}/newrelic-${NEWRELIC_VERSION}-heroku/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
+
+cp -f "${NEWRELIC_BUILD_DIR}/newrelic-${NEWRELIC_VERSION}-heroku/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+
 #echo "-----> Copying config files 8"
 
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
@@ -289,6 +292,8 @@ touch /app/vendor/php/var/log/php-errors.log
 touch /app/local/var/log/newrelic/newrelic-daemon.log
 touch /app/local/var/log/newrelic/php_agent.log
 touch /app/vendor/newrelic/etc/newrelic.cfg
+
+cp /app/vendor/php/etc.d/04_newrelic.ini /app/vendor/newrelic/etc/newrelic.cfg
 
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
