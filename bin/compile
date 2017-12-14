@@ -215,7 +215,7 @@ cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newr
 echo "-----> Copying config files 7"
 cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
 echo "-----> Copying config files 8"
-cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20100525/newrelic.so"
+cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20170718/newrelic.so"
 
 #erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
