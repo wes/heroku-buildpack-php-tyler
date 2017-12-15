@@ -308,6 +308,10 @@ touch /app/local/var/log/newrelic/newrelic-daemon.log
 touch /app/local/var/log/newrelic/php_agent.log
 touch /app/vendor/newrelic/etc/newrelic.cfg
 
+echo 'newrelic.enabled=true' >> /app/vendor/newrelic/etc/newrelic.cfg
+echo 'newrelic.appname="PHP7 Application"' >> /app/vendor/newrelic/etc/newrelic.cfg
+echo 'newrelic.license="cfa9faf73019614e842587086a40f1c04b55a468"' >> /app/vendor/newrelic/etc/newrelic.cfg
+
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
 
