@@ -4,7 +4,7 @@ export S3_BUCKET="s3.hmt.fm"
 
 export LIBMCRYPT_VERSION="2.5.8"
 export LIFREETYPE_VERSION="2.4.12"
-export PHP_VERSION="7.2.0"
+export PHP_VERSION="7.1.12"
 export APC_VERSION="3.1.10"
 export PHPREDIS_VERSION="3.1.4"
 export LIBMEMCACHED_VERSION="1.0.18"
