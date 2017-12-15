@@ -161,34 +161,10 @@ tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
-# echo "-----> Installing NewRelic"
-# 
-# NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
-# mkdir "${NEWRELIC_BUILD_DIR}"
-# cd "${NEWRELIC_BUILD_DIR}"
-# curl --silent -L ${NEWRELIC_URL} | tar xz
-# mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
-# 
-# echo "-----> Done Installing NewRelic"
-
-#popd > /dev/null
-
 echo "-----> Installing NewRelic"
-# export NR_INSTALL_SILENT="true"
-# export NR_INSTALL_NOKSH="true"
-# export NR_INSTALL_SHELL="/bin/sh"
-# export NR_INSTALL_PATH="${BUILD_DIR}/vendor/newrelic/"
-# export NR_INSTALL_PHPLIST="${BUILD_DIR}"
-# export NR_INSTALL_ARCH="x64"
-# export NR_INSTALL_KEY="3059beac230bc653378add929ca186d2b5ddfa5c"
-# NEWRELIC_BUILD_DIR="/tmp/newrelic-build"
-# rm -rf "${NEWRELIC_BUILD_DIR}"
-# mkdir -p "${NEWRELIC_BUILD_DIR}"
 mkdir -p "${BUILD_DIR}/vendor/newrelic"
 cd "${BUILD_DIR}/vendor/newrelic"
 curl --silent -L ${NEWRELIC_URL} | tar xz
-echo "-----> DONE Installing NewRelic"
-
 
 # Composer Installation
 pushd ${BUILD_DIR} > /dev/null
@@ -228,13 +204,6 @@ echo "-----> Copying config files 5"
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 echo "-----> Copying config files 6"
 cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
-
-# cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/daemon/newrelic-daemon.x64" ${BUILD_DIR}/vendor/newrelic/bin/newrelic-daemon
-# echo "-----> Copying config files 7"
-# echo "-----> Copying config files 8"
-# cp -f "${NEWRELIC_BUILD_DIR}/newrelic-php5-${NEWRELIC_VERSION}-linux/agent/x64/newrelic-20100525.so" "${BUILD_DIR}/vendor/php/lib/php/extensions/no-debug-non-zts-20170718/newrelic.so"
-
-#erb $LP_DIR/conf/nginx.conf.erb > ${BUILD_DIR}/vendor/nginx/conf/nginx.conf
 
 echo "-----> Installing boot script"
 cd $BUILD_DIR
@@ -298,7 +267,7 @@ mkdir /app/local/var/log
 mkdir /app/local/var/log/newrelic
 mkdir /app/local/var/log/newrelic/run
 
-#touch /app/local/var/log/newrelic/run/newrelic-daemon.pid
+touch /app/local/var/log/newrelic/run/newrelic-daemon.pid
 
 touch /app/vendor/nginx/logs/access.log
 touch /app/vendor/nginx/logs/error.log
@@ -307,10 +276,6 @@ touch /app/vendor/php/var/log/php-errors.log
 touch /app/local/var/log/newrelic/newrelic-daemon.log
 touch /app/local/var/log/newrelic/php_agent.log
 touch /app/vendor/newrelic/etc/newrelic.cfg
-
-echo 'newrelic.enabled=true' >> /app/vendor/newrelic/etc/newrelic.cfg
-echo 'newrelic.appname="PHP7 Application"' >> /app/vendor/newrelic/etc/newrelic.cfg
-echo 'newrelic.license="3059beac230bc653378add929ca186d2b5ddfa5c"' >> /app/vendor/newrelic/etc/newrelic.cfg
 
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
