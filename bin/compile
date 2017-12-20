@@ -262,25 +262,17 @@ for var in \`env | cut -f1 -d=\`; do
 	echo "env[\$var] = \\$\${var}" >> /app/vendor/php/etc/php-fpm.conf
 done
 
-mkdir /app/local/var
-mkdir /app/local/var/log
-mkdir /app/local/var/log/newrelic
-mkdir /app/local/var/log/newrelic/run
-
-touch /app/local/var/log/newrelic/run/newrelic-daemon.pid
-
 touch /app/vendor/nginx/logs/access.log
 touch /app/vendor/nginx/logs/error.log
 touch /app/vendor/php/var/log/php-fpm.log
 touch /app/vendor/php/var/log/php-errors.log
-touch /app/local/var/log/newrelic/newrelic-daemon.log
-touch /app/local/var/log/newrelic/php_agent.log
-touch /app/vendor/newrelic/etc/newrelic.cfg
+
+touch /app/vendor/newrelic/var/run/newrelic-daemon.pid
 
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
 
-/app/vendor/newrelic/bin/newrelic-daemon --logfile /app/local/var/log/newrelic/newrelic-daemon.log -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
+/app/vendor/newrelic/bin/newrelic-daemon --logfile /app/vendor/newrelic/var/log/newrelic-daemon.log -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
 
 /app/vendor/php/sbin/php-fpm
 /app/vendor/nginx/sbin/nginx
