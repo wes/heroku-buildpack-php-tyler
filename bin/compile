@@ -273,7 +273,7 @@ touch /app/vendor/newrelic/var/run/newrelic-daemon.pid
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/vendor/newrelic/var/log/*.log &)
 
-/app/vendor/newrelic/bin/newrelic-daemon -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
+/app/vendor/newrelic/bin/newrelic-daemon --logfile /app/vendor/newrelic/var/log/newrelic-daemon.log -c /app/vendor/newrelic/etc/newrelic.cfg --loglevel error
 
 /app/vendor/php/sbin/php-fpm
 /app/vendor/nginx/sbin/nginx
