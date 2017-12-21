@@ -202,8 +202,6 @@ echo "-----> Copying config files 4"
 cp $LP_DIR/conf/nginx.conf.erb ${BUILD_DIR}/vendor/nginx/conf/nginx.conf.erb
 echo "-----> Copying config files 5"
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
-echo "-----> Copying config files 6"
-cp $LP_DIR/conf/php.ini ${BUILD_DIR}/vendor/php/php.ini
 
 echo "-----> Installing boot script"
 cd $BUILD_DIR
