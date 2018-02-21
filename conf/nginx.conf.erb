@@ -38,7 +38,7 @@ http {
   index             index.php index.html index.htm;
 
   server {
-    listen            <%= ENV['PORT'] %>;
+    listen            <%= ENV['PORT'] %> http2;
     server_name       _;
 
     # Some basic cache-control for static files to be sent to the browser
