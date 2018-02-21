@@ -47,10 +47,10 @@ popd
 # download and extract openssl into directory
 mkdir -p $tempdir/openssl
 pushd $tempdir/openssl
-wget https://www.openssl.org/source/openssl-1.0.1p.tar.gz
-gunzip openssl-1.0.1p.tar.gz
-tar -xvf openssl-1.0.1p.tar
-rm openssl-1.0.1p.tar
+wget https://www.openssl.org/source/openssl-1.0.2h.tar.gz
+gunzip openssl-1.0.2h.tar.gz
+tar -xvf openssl-1.0.2h.tar
+rm openssl-1.0.2h.tar
 popd
 
 
@@ -58,7 +58,7 @@ pushd $tempdir/nginx-$NGINX_VERSION
 
 mkdir -p /app/vendor/nginx
 
-./configure --prefix=/app/vendor/nginx --with-pcre=$tempdir/contrib/pcre-8.21 --with-openssl=$tempdir/openssl/openssl-1.0.1p --with-zlib=$tempdir/zlib/zlib-1.2.8 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module && make install
+./configure --prefix=/app/vendor/nginx --with-pcre=$tempdir/contrib/pcre-8.21 --with-openssl=$tempdir/openssl/openssl-1.0.2h --with-zlib=$tempdir/zlib/zlib-1.2.8 --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module --with-http_v2_module && make install
 
 pushd /app/vendor/nginx
 
