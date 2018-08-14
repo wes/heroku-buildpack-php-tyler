@@ -26,6 +26,7 @@ MCRYPT_URL="${S3_URL}/${MCRYPT_FILE}"
 MEMCACHED_URL="${S3_URL}/${MEMCACHED_FILE}"
 PHP_URL="${S3_URL}/${PHP_FILE}"
 NEWRELIC_URL="${S3_URL}/${NEWRELIC_FILE}"
+PHPUNIT_URL="https://phar.phpunit.de/phpunit-old.phar"
 COMPOSER_URL="http://getcomposer.org/composer.phar"
 PEAR_LIB="${S3_URL}/${PEARLIB_FILE}"
 #
@@ -160,6 +161,35 @@ mkdir -p ${BUILD_DIR}/vendor/php
 tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="{$PATH}:${BUILD_DIR}/vendor/php/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
+
+#Create a sym link for PHP UNIT
+if [ ! -L /usr/bin/php ]
+then
+	echo "Creating symbolic link for PHP"
+	ln -s ${BUILD_DIR}/vendor/php/bin/php
+fi
+
+#PHP Unit Installation
+echo "-----> Installing PHP Unit"
+cd /usr/local/bin
+if [ ! -f phpunit-old.phar ]
+then
+	echo "Fetching phpunit-old.phar"
+	download_url ${PHPUNIT_URL}
+fi
+
+mv phpunit-old.phar phpunit.phar
+chmod +x phpunit.phar
+
+if [ ! -f ~/.bash_aliases ]
+then
+	touch ~/.bash_aliases
+fi
+
+echo "-----> Creating aliases for PHP UNIT"
+echo "alias phpunit='/usr/local/bin/phpunit.phar" >> ~/.bash_aliases
+echo "alias testmycode='buildtestdatabase && export APPLICATION_ENV=local && cd /vagrant && phpunit -c phpunit.xml'" >> ~/.bash_aliases
+echo "alias buildtestdatabase='cd /vagrant && find __sql_changes/_schema/ -name '\''*.sql'\'' | awk '\''{ print "'\''"source"'\''",$0 }'\'' | mysql --batch -u root -proot holdmyticket_test'" >> ~/.bash_aliases
 
 echo "-----> Installing NewRelic"
 mkdir -p "${BUILD_DIR}/vendor/newrelic"
