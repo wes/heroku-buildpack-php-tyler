@@ -13,7 +13,7 @@ NEWRELIC_VERSION=7.6.0.201
 S3_URL="https://s3.amazonaws.com/s3.hmt.fm/php7-build"
 
 MANIFEST_FILE="manifest.md5sum"
-NGINX_FILE="nginx-http2-${NGINX_VERSION}.tar.gz"
+NGINX_FILE="nginx-http2-dev-${NGINX_VERSION}.tar.gz"
 MCRYPT_FILE="libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
