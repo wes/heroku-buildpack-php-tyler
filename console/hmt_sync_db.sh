@@ -10,9 +10,9 @@ read answer
 if echo "$answer" | grep -iq "^remote" ;then
   echo 'Downloading Remote Database Dump'
   if echo "$size" | grep -iq "^full" ;then
-    scp root@162.243.16.64:/home/latest.sql.gz /vagrant/.tmp/holdmyticket.sql.gz
+    scp root@142.93.253.210:/home/latest.sql.gz /vagrant/.tmp/holdmyticket.sql.gz
   else
-    scp root@162.243.16.64:/home/latest_small.sql.gz /vagrant/.tmp/holdmyticket.sql.gz
+    scp root@142.93.253.210:/home/latest_small.sql.gz /vagrant/.tmp/holdmyticket.sql.gz
   fi
 else
   echo 'Downloading Local Database Dump'
