@@ -290,8 +290,8 @@ chmod -R g+r /app/vendor/php/lib/php
 
 echo "-----> Installing PHPUnit"
 cd /usr/local/bin/
-wget https://phar.phpunit.de/phpunit-old.phar
-mv phpunit-old.phar phpunit.phar
+wget -O phpunit https://phar.phpunit.de/phpunit-7.phar
+mv phpunit phpunit.phar
 chmod +x phpunit.phar
 ln -s /app/vendor/php/bin/
 
