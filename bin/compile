@@ -106,14 +106,14 @@ echo "-----> Installing Nmap/Ncat"
 if [ -f "${NMAP_FILE}" ]
 then
 	# check manifest
-	if check_md5 "${NMAP_FILE}"
-	then
+	#if check_md5 "${NMAP_FILE}"
+	#then
 		echo "Bundling Nmap v${NMAP_VERSION}" | indent
 		echo ${NMAP_URL} | indent
 		download_url ${NMAP_URL}
-	else
-		echo "Using cached Nmap v${NMAP_VERSION}" | indent
-	fi
+	#else
+	#	echo "Using cached Nmap v${NMAP_VERSION}" | indent
+	#fi
 else
 	# fetch
 	echo "Bundling Nmap v${NMAP_VERSION}" | indent
