@@ -215,7 +215,9 @@ then
 fi
 popd > /dev/null
 
-
+# install ssh pass
+echo "-----> Installing SSHPass"
+apt-get install sshpass
 
 # Config files
 echo "-----> Copying config files"
