@@ -12,7 +12,6 @@ export MEMCACHED_VERSION="3.0.4"
 export NEWRELIC_VERSION="7.6.0.201"
 export NMAP_VERSION="7.70"
 export NGINX_VERSION="1.12.2"
-
 export EC2_PRIVATE_KEY=~/.ec2/pk.pem
 export EC2_CERT=~/.ec2/cert.pem
 export EC2_URL=https://ec2.us-east-1.amazonaws.com

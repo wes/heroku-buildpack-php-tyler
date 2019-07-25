@@ -21,6 +21,7 @@ MEMCACHED_FILE="libmemcached-${LIBMEMCACHED_VERSION}.tar.gz"
 PHP_FILE="php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
 NEWRELIC_FILE="newrelic-${NEWRELIC_VERSION}-heroku.tar.gz"
 PEARLIB_FILE="pearfiles.tar.gz"
+SSHPASS_FILE="sshpass.tar.gz"
 
 MANIFEST_URL="${S3_URL}/${MANIFEST_FILE}"
 NGINX_URL="${S3_URL}/${NGINX_FILE}"
@@ -30,6 +31,7 @@ MEMCACHED_URL="${S3_URL}/${MEMCACHED_FILE}"
 PHP_URL="${S3_URL}/${PHP_FILE}"
 NEWRELIC_URL="${S3_URL}/${NEWRELIC_FILE}"
 COMPOSER_URL="http://getcomposer.org/composer.phar"
+SSHPASS_URL="${S3_URL}/${SSHPASS_FILE}"
 PEAR_LIB="${S3_URL}/${PEARLIB_FILE}"
 #
 
@@ -123,6 +125,30 @@ fi
 
 mkdir -p ${BUILD_DIR}/vendor/nmap
 tar xzf ${NMAP_FILE} -C ${BUILD_DIR}/vendor/nmap
+
+# install sshpass
+echo "-----> Installing SSHPass"
+if [ -f "${SSHPASS_FILE}" ]
+then
+	# check manifest
+	if check_md5 "${SSHPASS_FILE}"
+	then
+		echo "Bundling SSHPASS" | indent
+		echo ${SSHPASS_URL} | indent
+		download_url ${SSHPASS_URL}
+	else
+		echo "Using cached SSHPASS" | indent
+	fi
+else
+	# fetch
+	echo "Bundling SSHPASS" | indent
+	echo ${SSHPASS_URL} | indent
+	download_url ${SSHPASS_URL}
+fi
+
+mkdir -p ${BUILD_DIR}/vendor/sshpass
+tar xzf ${SSHPASS_FILE} -C ${BUILD_DIR}/vendor/sshpass
+
 
 # libmcrypt
 echo "-----> Installing libmcrypt"
