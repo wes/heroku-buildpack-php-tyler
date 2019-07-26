@@ -1,0 +1,35 @@
+#!/bin/bash
+
+source ./set-env.sh
+
+set -e
+
+basedir="$( cd -P "$( dirname "$0" )" && pwd )"
+
+# make a temp directory
+tempdir="$( mktemp -t sshpass_XXXX )"
+rm -rf $tempdir
+mkdir -p $tempdir
+pushd $tempdir
+
+# download and extract sshpass
+git clone git://github.com/kevinburke/sshpass.git
+cd sshpass
+./configure
+make && make install
+
+pushd $tempdir/sshpass
+
+mkdir -p /app/vendor/sshpass
+
+./configure --prefix=/app/vendor/sshpass && make && make install
+
+pushd /app/vendor/sshpass
+
+tar czf /vagrant/_compiled/sshpass.tar.gz .
+
+popd
+
+echo "+ Binaries available at ./sshpass.tar.gz"
+echo "+ Upload this package to Amazon S3."
+

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+source ./set-env.sh
+
+set -e
+
+if [ "$NMAP_VERSION" == "" ]; then
+  echo "must set NMAP_VERSION, i.e NMAP_VERSION=7.70"
+  exit 1
+fi
+
+basedir="$( cd -P "$( dirname "$0" )" && pwd )"
+
+# make a temp directory
+tempdir="$( mktemp -t ncat_XXXX )"
+rm -rf $tempdir
+mkdir -p $tempdir
+pushd $tempdir
+
+# download and extract nmap
+curl -L https://nmap.org/dist/nmap-$NMAP_VERSION.tgz -o - | tar xz
+
+pushd $tempdir/nmap-$NMAP_VERSION
+
+mkdir -p /app/vendor/nmap
+
+./configure --prefix=/app/vendor/nmap && make && make install
+
+pushd /app/vendor/nmap
+
+tar czf /vagrant/_compiled/nmap-$NMAP_VERSION.tar.gz .
+
+popd
+
+echo "+ Binaries available at ./nmap-$NMAP_VERSION-heroku.tar.gz"
+echo "+ Upload this package to Amazon S3."
+
