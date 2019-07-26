@@ -104,6 +104,52 @@ mkdir -p ${BUILD_DIR}/vendor/nginx
 tar xzf ${NGINX_FILE} -C ${BUILD_DIR}/vendor/nginx
 sed -i 's/css;/css less;/g' ${BUILD_DIR}/vendor/nginx/conf/mime.types
 
+# nmap / ncat
+echo "-----> Installing Nmap/Ncat"
+if [ -f "${NMAP_FILE}" ]
+then
+	# check manifest
+	if check_md5 "${NMAP_FILE}"
+	then
+		echo "Bundling Nmap v${NMAP_VERSION}" | indent
+		echo ${NMAP_URL} | indent
+		download_url ${NMAP_URL}
+	else
+		echo "Using cached Nmap v${NMAP_VERSION}" | indent
+	fi
+else
+	# fetch
+	echo "Bundling Nmap v${NMAP_VERSION}" | indent
+	echo ${NMAP_URL} | indent
+	download_url ${NMAP_URL}
+fi
+
+mkdir -p ${BUILD_DIR}/vendor/nmap
+tar xzf ${NMAP_FILE} -C ${BUILD_DIR}/vendor/nmap
+
+# install sshpass
+echo "-----> Installing SSHPass"
+if [ -f "${SSHPASS_FILE}" ]
+then
+	# check manifest
+	if check_md5 "${SSHPASS_FILE}"
+	then
+		echo "Bundling SSHPASS" | indent
+		echo ${SSHPASS_URL} | indent
+		download_url ${SSHPASS_URL}
+	else
+		echo "Using cached SSHPASS" | indent
+	fi
+else
+	# fetch
+	echo "Bundling SSHPASS" | indent
+	echo ${SSHPASS_URL} | indent
+	download_url ${SSHPASS_URL}
+fi
+
+mkdir -p ${BUILD_DIR}/vendor/sshpass
+tar xzf ${SSHPASS_FILE} -C ${BUILD_DIR}/vendor/sshpass
+
 # libmcrypt
 echo "-----> Installing libmcrypt"
 if [ -f "${MCRYPT_FILE}" ]
