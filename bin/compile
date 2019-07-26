@@ -412,7 +412,12 @@ echo "-----> Installing Gulp"
 apt-get -y install nodejs
 apt-get -y install npm
 ln -s /usr/bin/nodejs /usr/bin/node
-npm install -g gulp
+
+# no more manual
+sed -i 's/NO_ENGINE_SUBSTITUTION/"NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"/g' /usr/local/mysql/my.cnf
+
+# this crashes for some reason
+# npm install -g gulp
 
 echo "-----> Installing Heroku ToolBelt"
 
