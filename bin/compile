@@ -431,6 +431,18 @@ alias hmt_deploy_dev='cd /vagrant && gulp --type=development_deploy && git push 
 ## setup for curls
 echo "127.0.0.1    holdmyticket.loc" >> /etc/hosts
 
+echo "Setting up permissions on mysql"
+
+cat >>/tmp/mysqlsetup.sql <<EOF
+use mysql
+update user set Host = '%' WHERE host = '127.0.0.1';
+flush privileges;
+EOF
+
+mysql -u root -proot < /tmp/mysqlsetup.sql
+
+rm /tmp/mysqlsetup.sql
+
 echo "Setting up your ssh key"
 
 ssh-keygen -t rsa -b 4096 -C "dev@holdmyticket.loc"
