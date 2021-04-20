@@ -214,6 +214,8 @@ tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
 export PATH="${PATH}:${BUILD_DIR}/vendor/php/bin:/usr/local/bin:/usr/bin:/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
 
+add-apt-repository ppa:linuxuprising/libpng12
+apt update
 apt-get install libpng12-0
 
 echo "-----> Installing NewRelic"
