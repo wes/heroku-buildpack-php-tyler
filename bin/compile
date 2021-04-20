@@ -208,16 +208,6 @@ else
 	download_url ${PHP_URL}
 fi
 
-mkdir -p ${BUILD_DIR}/vendor/php
-tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
-export PATH="${PATH}:${BUILD_DIR}/vendor/php/bin:/usr/local/bin:/usr/bin:/bin"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
-
-echo "-----> Installing NewRelic"
-mkdir -p "${BUILD_DIR}/vendor/newrelic"
-cd "${BUILD_DIR}/vendor/newrelic"
-curl --silent -L ${NEWRELIC_URL} | tar xz
-
 # Composer Installation
 # pushd ${BUILD_DIR} > /dev/null
 # if [ -f "composer.json" ]
@@ -240,6 +230,16 @@ curl --silent -L ${NEWRELIC_URL} | tar xz
 # 	export GIT_DIR=${GIT_DIR_ORIG}
 # fi
 # popd > /dev/null
+
+mkdir -p ${BUILD_DIR}/vendor/php
+tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
+export PATH="${PATH}:${BUILD_DIR}/vendor/php/bin:/usr/local/bin:/usr/bin:/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/local/lib"
+
+echo "-----> Installing NewRelic"
+mkdir -p "${BUILD_DIR}/vendor/newrelic"
+cd "${BUILD_DIR}/vendor/newrelic"
+curl --silent -L ${NEWRELIC_URL} | tar xz
 
 # Config files
 echo "-----> Copying config files"
